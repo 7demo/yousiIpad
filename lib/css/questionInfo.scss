@@ -1,0 +1,60 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.questionInfo{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1928px;
+	height: 100%;
+	background: $white;
+	box-shadow: -4px 0px 4px darken($btnBorderColor,20%);
+}
+.questionInfoHead{
+	width: 1888px;
+	height: 69px;
+	margin: 0 auto;
+	position: relative;
+	border-bottom: 2px solid $btnBorderColor;
+	text-align: center;
+	line-height: 69px;
+	font-size: 2rem;
+	&>span{
+		font-size: 1.5rem;
+	}
+	.questionInfoHeadBack{
+		width: 39px;
+		height: 37px;
+		display: block;
+		position: absolute;
+		background: url('/lib/images/popIcon.png?_sprite') no-repeat;
+		left: 15px;
+		top: 15px;
+	}
+}
+.questionInfoCtn{
+	width:1888px;
+	margin: 0 auto;
+	li{
+		width: 100%;
+		padding: 30px 0;
+		.questionInfoCtnName{
+			width: 300px;
+			min-height:250px; 
+			text-align: center;
+		}
+		.questionInfoCtnTxt{
+			width: 1560px;
+			p{
+				margin-bottom: 20px;
+			}
+		}
+		border-bottom: 2px solid $btnBorderColor;
+	}
+	li:last-child{
+		border-bottom: none;
+	}
+}

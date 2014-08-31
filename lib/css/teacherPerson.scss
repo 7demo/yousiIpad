@@ -1,0 +1,42 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.teacherPerson{
+	width: 1060px;
+	height: auto;
+	margin: 0 auto;
+	li{
+		width: 100%;
+		height: auto;
+		margin-bottom: 40px;
+		h3{
+			font-size: 1.8rem;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		p{
+			color: $grayColor;
+		}
+	}
+}
+.teacherPersonVideo{
+	width: 260px;
+	height: 150px;
+	position: relative;
+	margin-right: 80px;
+	border:$popColor solid 2px;
+	i{
+		position: absolute;
+		display: block;
+		width: 62px;
+		height: 62px;
+		top: 50%;
+		left: 50%;
+		margin-left: -31px;
+		margin-top: -31px;
+		background: url('/lib/images/iconPlay.png?__sprite') no-repeat;
+	}
+}

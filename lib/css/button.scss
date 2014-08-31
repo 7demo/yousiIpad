@@ -1,0 +1,61 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+
+.btn{
+	width: 160px;
+	height: 45px;
+	position: absolute;
+	right: 0;
+	display: inline-block;
+	border-radius: 3px;
+	background: darken($btnBgColor,20%); 
+	text-align: center;
+	line-height: 45px;
+	color: #E8F4EF;
+	font-style: normal;
+	box-shadow: 2px 2px 2px darken($btnBgColor,50%);
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+.navBtn{
+	@extend .btn;
+	box-shadow: none;
+	border: $btnBorderColor solid 2px;
+	position: relative;
+	background: $white;
+	color: $btnBorderColor;
+}
+.navBtnAvtive{
+	@extend .navBtn;
+	background: $btnBgColor;
+	color: $white;
+}
+.inforBtn{
+	display: inline-block;
+	font-style: normal;
+	width:120px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 1.5rem;
+	color: $fontColor1;
+	text-align: center; 
+	background: $inforBtnBgColor;
+}
+
+
+
+//
+.sexWoman{
+	width: 23px;
+	height: 31px;
+	display: inline-block;
+	background: url('/lib/images/sexWoman.png?__sprite') no-repeat;
+}
+.like{
+	width: 36px;
+	height: 39px;
+	display: inline-block;
+	background: url('/lib/images/like.png?__sprite') no-repeat;
+}

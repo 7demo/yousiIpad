@@ -1,0 +1,158 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.teacherInfo{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1140px;
+	height: 100%;
+	background: $white;
+	box-shadow: -4px 0px 4px darken($btnBorderColor,20%);
+}
+.teacherInfoHead{
+	width: 100%;
+	height: 69px;
+	position: relative;
+	border-bottom: 2px solid $btnBorderColor;
+	text-align: center;
+	line-height: 69px;
+	font-size: 2rem;
+	&>span{
+		font-size: 1.5rem;
+	}
+	.teacherInfoHeadBack{
+		width: 39px;
+		height: 37px;
+		display: block;
+		position: absolute;
+		background: url('/lib/images/popIcon.png?_sprite') no-repeat;
+		left: 15px;
+		top: 15px;
+	}
+	.teacherInfoHeadFollow{
+		width: 150px;
+		height: 30px;
+		line-height: 30px;
+		font-style: normal;
+		text-indent: 1.5rem;
+		display: block;
+		position: absolute;
+		background: url('/lib/images/iconFollow.png?_sprite') no-repeat;
+		right: 15px;
+		top: 25px;
+		font-size: 1.5rem;
+		color: darken($btnBgColor,20%);
+	}
+}
+.teacherInfoMain{
+	width: 1060px;
+	height: 180px;
+	margin: 40px auto;
+	.teacherInfoMainPic{
+		width: 180px;
+		height: 180px;
+		display: block;
+		border-radius: 1rem;
+		overflow: hidden;
+		position: relative;
+		span{
+			position: absolute;
+			bottom: 0;
+			width:100px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			left: 40px; 
+			color: $white;
+			font-size: 1.3rem;
+			background: $labelBgColor4;
+		}
+	}
+}
+.teacherInfoMainTxt{
+	width: 840px;
+	height: 180px;
+	h1{
+		font-size: 2.5rem;
+		margin-bottom: 10px;
+		span{
+			font-size: 1.5rem;
+		}
+		.like{
+			position: relative;
+			top: 6px;
+		}
+		&>i{
+			font-style: normal;
+			font-size: 1.5rem;
+			margin-left: 10px;
+			color: $grayColor;
+		}
+	}
+	p{
+		color: $grayColor;
+		margin-bottom: 4px;
+	}
+}
+
+.teacherInfoSwitch{
+	width: 100%;
+	height: 42px;
+	text-align: center;
+	font-size: 0;
+	margin-bottom: 40px;
+	span{
+		width: 200px;
+		height: 40px;
+		display: inline-block;
+		line-height: 40px;
+		background: $white;
+		border:$popColor solid 1px;
+		color: $popColor;
+		font-size: 1.5rem;
+		border-right-width: 0;
+	}
+	span:last-child{
+		border-right-width: 1px;
+	}
+	span.active{
+		background: $popColor;
+		color: $white;
+	}
+}
+.teacherInfoCtn{
+	width: 100%;
+	height: 973px;
+	overflow-y:scroll;
+	overflow-x:hidden;  
+}
+.teacherInfoBtn{
+	width: 100%;
+	height: 110px;
+	text-align: center;
+	background: lighten($grayColor,40%);
+	i{
+		font-style: normal;
+		display:inline-block;
+		height: 50px;
+		width: 210px;
+		line-height: 50px;
+		text-align: center;
+		position: relative;
+		top: 28px;
+	}
+	i:first-child{
+		border:$popColor solid 4px;
+		border-radius: 10px;
+		color: $popColor;
+	}
+	i:last-child{
+		border:invert($popColor) solid 4px;
+		border-radius: 10px;
+		color: invert($popColor);
+	}
+}

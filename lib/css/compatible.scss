@@ -1,0 +1,9 @@
+@charset 'utf-8';
+
+@mixin brower($name,$value){
+	-webkit-#{$name} : $value;
+	-moz-#{$name} : $value;
+	-o-#{$name} : $value;
+	-ms-#{$name} : $value;
+	#{$name} : $value;  
+}

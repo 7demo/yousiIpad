@@ -1,0 +1,21 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+
+.mainRight{
+	width: 726px;
+	height:100%;
+	position: relative;
+	i{
+		width: 430px;
+		height: 90px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -215px;
+		margin-top: -45px;
+		display: inline-block;
+		background: url('/lib/images/logo.png?__sprite') no-repeat;
+	}
+}

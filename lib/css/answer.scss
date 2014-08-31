@@ -1,0 +1,139 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.answer{
+	width: 100%;
+	height: 100%;
+}
+.answerCtn{
+	width: 1140px;
+	height: auto;
+	margin: 0 auto;
+}
+.answerHead{
+	width: 1140px;
+	height: 68px;
+	padding-top: 20px;
+	font-size: 0;
+	text-align: center;
+	position: relative;
+	vertical-align: middle;
+	border-bottom: 2px solid darken($btnBorderColor,20%);
+	color: darken($btnBorderColor,20%);
+	.answerHeadSelect{
+		width: 170px;
+		height: 40px;
+		display: inline-block;
+		border:solid 2px darken($btnBorderColor,10%);
+		font-size: 1.5rem;
+		border-radius: 5px;
+		background: $white;
+		select{
+			border:none;
+			color: darken($btnBorderColor,20%);
+			@include brower(appearance,none);
+		}
+		option{
+			font-size: 1.5rem;
+		}
+	}
+	.answerHeadSelect:first-child{
+		border-right: none;
+	}
+	
+}
+.answerLi{
+	width: 100%;
+	height: 1406px;
+	overflow-y:scroll; 
+	overflow-x:hidden; 
+	&>ul{
+		width: 1140px;
+		height: auto;
+		&>li{
+			width: 1100px;
+			height: 208px;
+			position: relative;
+			padding: 45px 10px;  
+			border-bottom: 2px dashed darken($btnBorderColor,10%);
+			img{
+				display: block;
+				width: 208px;
+				height: 208px;
+				border-radius: 1rem;
+			}
+			div.answerLiTxt{
+				width:865px;
+				height: 100%;
+				font-size: 2rem;
+				ul{
+					width: 100%;
+					height: 100%;
+					display: table;
+					li{
+						display: table-cell;
+						height: 100%;
+						vertical-align: middle;
+						font-size: 1.5rem;
+					}
+				}
+			}
+		}
+	}
+}
+.answerLiTxt{
+	h1{
+		font-size: 2.5rem;
+		span{
+			font-size: 1.5rem;
+			color: darken($btnBorderColor,20%);
+		}
+		.like{
+			position: relative;
+			top: 7px;
+		}
+	}
+	p{
+		line-height: 40px;
+	}
+}
+.answerLiTxtInforBtn{
+	margin-top: 25px;
+	i{
+		@extend .inforBtn;
+		width: 150px;
+		height: 40px;
+		border-radius: 5px;
+		line-height: 40px;
+	}
+	.label1{
+		background: $labelBgColor1;
+	}
+	.label2{
+		background: $labelBgColor2;
+	}
+	.label3{
+		background: $labelBgColor3;
+	}
+	.label4{
+		background: $labelBgColor4;
+	}
+}
+.answerLiTxtAppointment{
+	i{
+		@extend .btn;
+		position: relative;
+		background: $labelBgColor2;
+		box-shadow:2px 2px 2px darken($labelBgColor2,20%); 
+	}
+}
+.answerLiTxtAppointmentNot{
+	i{
+		background: $grayColor;
+		box-shadow:2px 2px 2px darken($grayColor,20%); 
+	}
+}
+

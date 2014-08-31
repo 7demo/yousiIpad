@@ -1,0 +1,31 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+
+html,body{
+	width: 100%;
+	height: 100%;
+	font-family: 'Hiragino Sans GB','Hiragino Sans GB W3','Microsoft YaHei','WenQuanYi Micro Hei',sans-serif;
+	-webkit-font-smoothing:antialiased;
+}
+.wrap{
+	width: 2048px;
+	height: 1536px;
+	@include brower(transform-origin,0 0);
+	@include brower(transform,scale(0.5));
+	background: url('/lib/images/bg.jpg') repeat;
+	overflow: hidden;
+	font-size: 1.5rem;
+}
+.main{
+	width: 100%;
+	height: 1496px;
+	position: relative;
+}
+.mainCtn{
+	width: 1200px;
+	height: 100%;
+	box-shadow:#0B1311 -2px 0 5px; 
+	background: url('/lib/images/mainBg.jpg') repeat;
+}

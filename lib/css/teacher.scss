@@ -1,0 +1,101 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.teacher{
+	width: 100%;
+	height: 100%;
+}
+.teacherCtn{
+	width: 1140px;
+	height: auto;
+	margin: 0 auto;
+}
+.teacherHead{
+	width: 1140px;
+	height: 68px;
+	padding-top: 20px;
+	font-size: 0;
+	text-align: center;
+	position: relative;
+	vertical-align: middle;
+	border-bottom: 2px solid darken($btnBorderColor,20%);
+	i{
+		border-right: none;
+	}
+	i:last-child{
+		border-right:$btnBorderColor solid 2px !important;
+	}
+}
+.teacherLi{
+	width: 100%;
+	height: 1406px;
+	overflow-y:scroll; 
+	overflow-x:hidden; 
+	&>ul{
+		width: 1140px;
+		height: auto;
+		&>li{
+			width: 1100px;
+			height: 208px;
+			position: relative;
+			padding: 45px 10px;  
+			border-bottom: 2px dashed darken($btnBorderColor,10%);
+			img{
+				display: block;
+				width: 208px;
+				height: 208px;
+				border-radius: 1rem;
+			}
+			div.teacherLiTxt{
+				width:865px;
+				height: 100%;
+				font-size: 2rem;
+				ul{
+					width: 100%;
+					height: 100%;
+					display: table;
+					li{
+						display: table-cell;
+						height: 100%;
+						vertical-align: middle;
+						font-size: 1.5rem;
+					}
+				}
+			}
+		}
+	}
+}
+.teacherLiTxt{
+	h1{
+		font-size: 2.5rem;
+		span{
+			font-size: 1.5rem;
+			color: darken($btnBorderColor,20%);
+		}
+		.like{
+			position: relative;
+			top: 7px;
+		}
+	}
+}
+.teacherLiTxtInforBtn{
+	i{
+		@extend .inforBtn;
+	}
+}
+.teacherLiTxtPrice{
+	color: $inforBtnBgColor;
+	font-size: 1.2em !important;
+	font-weight: bold;
+}
+.teacherLiTxtAppointment{
+	i{
+		@extend .btn;
+		position: relative;
+		background: $appointmentBtnBg;
+		box-shadow:2px 2px 2px darken($appointmentBtnBg,20%); 
+	}
+}

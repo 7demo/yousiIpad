@@ -1,0 +1,46 @@
+@charset'utf-8';
+@import 'color.scss';
+@import 'compatible.scss';
+
+.nav{
+	width: 120px;
+	height: 100%;
+	ul{
+		width: 100%;
+		height: 100%;
+		position: relative;
+		li{
+			width: 100%;
+			height: 120px;
+			margin-top: 50px;
+			text-align: center;
+			color: $navfontColor;
+			i{
+				width: 80px;
+				height: 80px;
+				display: inline-block;
+			}
+		}
+	}
+}
+@for $i from 1 to 7{
+	.nav ul li:nth-child(#{$i}) i{
+		background: url('/lib/images/icon#{$i}1.png?__sprite') no-repeat;
+	}
+}
+
+@for $i from 1 to 7{
+	.nav ul li:nth-child(#{$i}):hover {
+		i{
+			background: url('/lib/images/icon#{$i}2.png?__sprite') no-repeat;
+		}
+		color: $navfontHoverColor;
+	}
+}
+
+@for $i from 5 to 7{
+	.nav ul li:nth-child(#{$i}){
+		position: relative;
+		top: 400px;
+	}
+}
