@@ -1,0 +1,14 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.classroomRight{
+	width: 1604px;
+	height: 1392px;
+	background: $white;
+	border:lighten($grayColor,15%) solid 2px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px $grayColor;
+}

@@ -12,6 +12,7 @@ html,body{
 .wrap{
 	width: 2048px;
 	height: 1536px;
+	position: relative;
 	@include brower(transform-origin,0 0);
 	@include brower(transform,scale(0.5));
 	background: url('/lib/images/bg.jpg') repeat;
