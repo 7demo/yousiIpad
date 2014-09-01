@@ -1,10 +1,10 @@
 //资源合并
-fis.config.set('modules.postpackager', 'simple'); //开始该配置，自动引用新资源，比如以下配置，则在引用lib.js 并放在页面后面 命令参数为 -p
-fis.config.set('pack',{  //该配置进行合并的人工干预——开始此配置，使用-p参数，则会把js文件合并输出到输出文件夹下pkg/lib.js 中
-    'pkg/lib.js':[
-        '/Public/lib/**.js'
-    ]
-});
+// fis.config.set('modules.postpackager', 'simple'); //开始该配置，自动引用新资源，比如以下配置，则在引用lib.js 并放在页面后面 命令参数为 -p
+// fis.config.set('pack',{  //该配置进行合并的人工干预——开始此配置，使用-p参数，则会把js文件合并输出到输出文件夹下pkg/lib.js 中
+//     'pkg/lib.js':[
+//         '/Public/lib/**.js'
+//     ]
+// });
 
  //对资源进行自动合并,主要针对多个css合成一个css
 fis.config.set('settings.postpackager.simple.autoCombine', true);
@@ -46,7 +46,7 @@ fis.config.merge({
                 //发布到/static/js/xxx目录下
                 release : '/static/js/$1',
                 //访问url是/mm/static/js/xxx
-                // url : '/mm/static/js$&'
+                url : '../static/js/$1'
             },
             {
                 //所有的css文件
@@ -55,7 +55,7 @@ fis.config.merge({
                 //发布到/static/css/xxx目录下
                 release : '/static/css/$1',
                 //访问url是/pp/static/css/xxx
-                // url : '../static/css/$1'
+                url : '../static/css/$1'
             },
             {
                 //所有image目录下的.png，.gif文件
@@ -63,7 +63,7 @@ fis.config.merge({
                 //发布到/static/pic/xxx目录下
                 release : '/static/images/$1',
                 //访问url是/oo/static/baidu/xxx
-                // url : '/oo/static/baidu$&'
+                url : '../images/$1'
             }
         ]
     }
