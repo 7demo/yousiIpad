@@ -1,47 +1,27 @@
 <!-- //答疑列表 -->
+<script type="text/javascript" src="/lib/js/grade.js"></script>
 <link rel="stylesheet" type="text/css" href="/lib/css/answer.scss">
 <div class="answer fn-clear fn-hide">
 	<div class="answerCtn">
 		<div class="answerHead fn-clear">
-			<div class="answerHeadSelect">
-				<select>
+			<div class="answerHeadSelect" >
+				<select id = "gradeSelect">
 					<option>全部</option>
-					<option>高三</option>
+					<!-- <option>高三</option> -->
 				</select>
 				<label>▼</label>
 			</div>
 			<div class="answerHeadSelect">
-				<select>
+				<select id = "subjectSelect">
 					<option>全部</option>
-					<option>数学</option>
+					<!-- <option>数学</option> -->
 				</select>
 				<label>▼</label>
 			</div>	
 		</div>
 		<div class="answerLi fn-clear">
 			<ul>
-				<li class='fn-clear'>
-					<img class="fn-left" src="/lib/images/pic2.png">
-					<div class="answerLiTxt fn-right">
-						<ul>
-							<li>
-								<h1>
-									肖夏雯 
-									<em class='sexWoman'></em>
-									<span> ( <i class='like'></i> 41 )</span>
-								</h1>
-								<p>上海交大-数学系</p>
-								<p>辅助学科：物理、数学、英语</p>
-								<div class='answerLiTxtInforBtn'>
-									<i class='label1'>讲得真好</i>
-									<i class='label2'>数学高手</i>
-									<i class='label3'>厉害的老师</i>
-								</div>
-							</li>
-							<li class='answerLiTxtAppointment answerLiTxtAppointmentNot'><i>点击答疑</i></li>
-						</ul>
-					</div>
-				</li>
+
 				<li class='fn-clear'>
 					<img class="fn-left" src="/lib/images/pic2.png">
 					<div class="answerLiTxt fn-right">
@@ -90,3 +70,109 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function setAnswerPage(){
+		getAnswerPageList();
+	}
+
+	function getAnswerPageList(){
+		var subjectId = $('#subjectSelect  option:selected').val();
+        var gradeId = $('[name="grade"]  option:selected').val();
+		$.get(serverip + "/Ipadinterface/getAnswerList",function(data,status){
+            if(data.code == 200){
+                gradeData = data.data.gradeData;
+                teacherList = data.data.teacherList
+                setAnswerPageSelect();
+                setAnswerList()
+                
+            }
+        });
+	}
+
+
+	function  setAnswerList(){
+		html = ""
+		for ( var i in teacherList )
+		{
+			html = html + '<li class=\'fn-clear\'>'
+			html = html + '	<img class=\"fn-left\" src=\"'+ serverpic + teacherList[i].t_picture1 +'\">'
+			html = html + '	<div class=\"answerLiTxt fn-right\">'
+			html = html + '		<ul>'
+			html = html + '			<li>'
+			html = html + '				<h1>'
+			html = html + '					'+teacherList[i].t_realname+ ' '
+			if( teacherList[i].t_sex == 1 ){
+				html = html + '					<em class=\'sexWoman\'></em>'
+			}else{
+				html = html + '					<em class=\'sexBoy\'></em>'
+			}
+			html = html + '					<span> ( <i class=\'like\'></i> '+teacherList[i].praisecount+' )</span>'
+			html = html + '				</h1>'
+			html = html + '				<p>'+teacherList[i].t_schoolname+'-'+teacherList[i].t_departmentname+'</p>'
+			var subject = teacherList[i].tp_teach_subject
+			subject = subject.replace(/<br\/>/g,"")
+			subject = subject.replace(/<span>/g,"")
+			subject = subject.replace(/<\/span>/g,"  ")
+			html = html + '				<p>辅助学科：'+ subject+'</p>'
+			html = html + '				<div class=\'answerLiTxtInforBtn\'>'
+			for (var imp in teacherList[i].impression){
+				rand = Math.floor(Math.random()*4) + 1;
+				html = html + '					<i class=\'label'+ rand +'\'>'+teacherList[i].impression[imp].i_impression+'</i>'
+				console.log(imp)
+				if(imp > 1){
+					break;
+				}
+			}
+			html = html + '				</div>'
+			html = html + '			</li>'
+			html = html + '			<li class=\'answerLiTxtAppointment answerLiTxtAppointmentNot\'><i>点击答疑</i></li>'
+			html = html + '		</ul>'
+			html = html + '	</div>'
+			html = html + '</li>'
+		}
+		$(".answerLi ul").html(html)
+	}
+
+	function setAnswerPageSelect(){
+		clearAll()
+		setGradeSelect()
+		setSubjectSelect()
+	}
+
+	function clearAll(){
+		$(".answerLi ul li").remove()
+		$('#gradeSelect option').remove();
+		$('#subjectSelect option').remove();
+	}
+
+	function setGradeSelect(){
+		for ( var i in gradeData ) {
+            html = '';
+            if( gradeData[i].gid != 4 &&   gradeData[i].id > 4){
+                if( gradeData[i].id == 5 ){
+                    html = html + '<option selected=\"selected\" value=\"'+ gradeData[i].id +'\">'+gradeData[i].name+'</option>'
+                }else{
+                     html = html + '<option  value=\"'+ gradeData[i].id +'\">' + gradeData[i].name + '</option>'
+                }
+               
+            }
+            $('#gradeSelect').append(html);
+        }
+	}
+
+	function setSubjectSelect(){
+		for ( var i in gradeData ) {
+            html = '';
+            if( gradeData[i].gid == 4 ){
+                if( gradeData[i].id == 17 ){
+                    html = html + '<option selected=\"selected\" value=\"'+ gradeData[i].id +'\">'+gradeData[i].name+'</option>'
+                }else{
+                    html = html + '<option  value=\"'+ gradeData[i].id +'\">' + gradeData[i].name + '</option>'
+                }
+                $('#subjectSelect').append(html);
+            } 
+        }
+	}
+
+</script>

@@ -85,7 +85,7 @@
 					html = html + '<p>辅助学科：'+subject+'</p>'
 					$(".teacherInfoMainPic img").attr("src",serverpic + teacherInfo.t_picture1)
 					$('.teacherInfoHead em').html(teacherInfo.t_realname);
-					$('.teacherInfoMainTxt').append(html)
+					$('.teacherInfoMainTxt').html(html)
 					$('.teacherInfo').addClass('teacherStatusShow');
 				})
 			}

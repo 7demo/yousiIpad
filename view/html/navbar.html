@@ -2,27 +2,27 @@
 <link rel="stylesheet" type="text/css" href="/lib/css/nav.scss">
 <div class="nav fn-clear fn-left">
 	<ul>
-		<li>
+		<li value ="1">
 			<i></i>
 			<p>答疑</p>
 		</li>
-		<li>
+		<li value ="2">
 			<i></i>
 			<p>家教</p>
 		</li>
-		<li>
+		<li value ="3">
 			<i></i>
 			<p>提问</p>
 		</li>
-		<li>
+		<li value ="4">
 			<i></i>
 			<p>我的</p>
 		</li>
-		<li>
+		<li value ="5">
 			<i></i>
 			<p>消息</p>
 		</li>
-		<li>
+		<li value ="6">
 			<i></i>
 			<p>设置</p>
 		</li>
@@ -30,7 +30,23 @@
 	<script type="text/javascript">
 		$(function(){
 			$(".nav ul li").click(function(){
-				
+				var pid = $(this).attr("value")
+				switch(pid)
+				{
+					case '1':
+					    setAnswerPage();
+						break;
+					case '2':
+						getTeacherList();
+						break;
+					case '3':
+						
+						break;	
+					default:
+					  break;
+				}
+				$('.mainCtn .mainPage' + pid).removeClass("fn-hide")
+				$('.mainCtn .mainPage' + pid).siblings().addClass("fn-hide")
 			})
 		})
 	</script>

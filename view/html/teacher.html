@@ -14,8 +14,8 @@
 			</ul>
 		</div>
 		<script type="text/javascript">
-		
-		$(function(){
+		function getTeacherList()
+		{
 			var sex = 1;
 		    var school = 0;
 		    var province = 0;
@@ -42,6 +42,7 @@
 		        uArray.push(key + "=" + nArray[key]);
 		    }
 		    var url = uArray.join('&');
+		    $(".teacherLi ul li").remove();
 	        url = serverip +"/Ipadinterface/getTutorList/?"+ url;
 	        $.get(url, function(data){
 	        	teacherList = data.data.teacherList;
@@ -81,12 +82,11 @@
 					html = html + '			</div>'
 					html = html + '		</li>'
 				}
-				$(".teacherLi ul").append(html);
-				console.log($(".teacherLi"))
+				$(".teacherLi ul").html(html);
 				$(".teacherLi").on("click","li.teacherLiTxtAppointment",function(){
 					// $('.teacherInfo').addClass('teacherStatusShow');
 					setTeacherInfo($(this).attr("value"));
-					// return false;
+					return false;
 				});
 				
 
@@ -94,7 +94,7 @@
 
 				
 			})
-		})
+		}
 
 	        
 		
