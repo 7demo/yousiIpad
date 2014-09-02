@@ -8,29 +8,34 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 200%;
 	height: 100%;
 	z-index: 200;
 }
 .accessCtn{
-	width: 100%;
-	height: 100%;
-	position: absolute;
+	width: 2048px;
+	height: 1236px;
+	padding-top: 300px;
+	position: relative;
+	left: 0;
 	z-index: 200;
 	background: lighten($grayColor,40%);
 	text-align: center;
+	@include brower(transition,all 0.4s ease-in-out);
 	h3{
-		margin-top: 350px;
 		font-size: 3rem;
 		color: $loginColor;
 		margin-bottom: 50px;
 	}
 }
+.accessCtnMove{
+	left: -2048px;
+	@include brower(transition,all 0.4s ease-in-out);
+}
 .loginPhoto{
 	width: 180px;
 	height: 180px;
 	margin: 0 auto;
-	margin-top: 200px;
 	background: $white;
 	border-radius: 20px;
 	overflow: hidden;

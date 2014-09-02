@@ -6,12 +6,17 @@
 
 .teacherInfo{
 	position: absolute;
-	right: 0;
+	right: -1140px;
 	top: 0;
 	width: 1140px;
 	height: 100%;
 	background: $white;
 	box-shadow: -4px 0px 4px darken($btnBorderColor,20%);
+	@include brower(transition,all 0.3s ease-in-out);
+}
+.teacherStatusShow{
+	right:0;
+	@include brower(transition,all 0.3s ease-in-out);
 }
 .teacherInfoHead{
 	width: 100%;
