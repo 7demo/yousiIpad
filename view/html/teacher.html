@@ -1,6 +1,85 @@
 <!-- //家教页面 -->
 <link rel="stylesheet" type="text/css" href="/lib/css/teacher.scss">
-<div class="teacher fn-clear fn-hide">
+<div class="teacher fn-clear">
+	<script type="text/javascript">
+		
+		$(function(){
+
+			var sex = 1;
+		    var school = 0;
+		    var province = 0;
+		    var grade = 5;
+		    var subject = 17;
+		    var nArray = new Array();
+		    var uArray = new Array();
+		    
+		    if (sex != 0) {
+		        nArray['sex'] = sex
+		    }
+		    if (school != 0) {
+		        nArray['school'] = school
+		    }
+		    if (province != 0) {
+		        nArray['province'] = province
+		    }
+		    if (grade != 0) {
+		        nArray['grade'] = grade
+		    }
+		    if (subject != 0) {
+		        nArray['subject'] = subject
+		    }
+		    for (key in nArray) {
+		        uArray.push(key + "=" + nArray[key]);
+		    }
+		    var url = uArray.join('&');
+	        url = serverip +"/Ipadinterface/getTutorList/?"+ url;
+	        $.get(url, function(data){
+	        	teacherList = data.data.teacherList;
+	        	html = ""
+				for(var i in teacherList){
+					
+					html = html + '		<li class=\'fn-clear\'>'
+					html = html + '			<img class=\"fn-left\" src=\"'+serverpic + teacherList[i].t_picture1+'\">'
+					html = html + '			<div class=\"teacherLiTxt fn-right\">'
+					html = html + '				<ul>'
+					html = html + '					<li>'
+					html = html + '						<h1>'
+					html = html + '							'+teacherList[i].t_realname+' '
+					html = html + '							<em class=\'sexWoman\'></em>'
+					html = html + '							<span> ( <i class=\'like\'></i> 41 )</span>'
+					html = html + '						</h1>'
+					html = html + '						<p>'+teacherList[i].t_schoolname+'-'+teacherList[i].t_departmentname+'</p>'
+					html = html + '						<p>'+teacherList[i].t_cityname+'</p>'
+					var subject = teacherList[i].tp_teach_subject
+					subject = subject.replace(/<br\/>/g,"")
+					subject = subject.replace(/<span>/g,"")
+					subject = subject.replace(/<\/span>/g,"  ")
+					
+					html = html + '						<p>辅助学科：'+subject+'</p>'
+					html = html + '						<div class=\'teacherLiTxtInforBtn\'>'
+					html = html + '							<i>查看日历</i>'
+					html = html + '							<i>查看评价</i>'
+					html = html + '						</div>'
+					html = html + '					</li>'
+					html = html + '					<li class=\'teacherLiTxtPrice\'>￥'+teacherList[i].t_teach_price+'元/时</li>'
+					html = html + '					<li class=\'teacherLiTxtAppointment\' value = \"'+teacherList[i].t_id+'\"><i>预约家教</i></li>'
+					html = html + '				</ul>'
+					html = html + '			</div>'
+					html = html + '		</li>'
+				}
+				$(".teacherLi ul").append(html);
+				$(".teacherLi ul li").click(function(){
+					alert("aaa")
+					getTeacherInfo(this);
+				})
+
+				
+			})
+		})
+
+	        
+		
+	</script>
 	<div class="teacherCtn">
 		<div class="teacherHead fn-clear">
 			<i class='navBtnAvtive'>教师列表</i>
@@ -9,30 +88,7 @@
 		</div>
 		<div class="teacherLi fn-clear">
 			<ul>
-				<li class='fn-clear'>
-					<img class="fn-left" src="/lib/images/pic2.png">
-					<div class="teacherLiTxt fn-right">
-						<ul>
-							<li>
-								<h1>
-									肖夏雯 
-									<em class='sexWoman'></em>
-									<span> ( <i class='like'></i> 41 )</span>
-								</h1>
-								<p>上海交大-数学系</p>
-								<p>吉林长春人</p>
-								<p>辅助学科：物理、数学、英语</p>
-								<div class='teacherLiTxtInforBtn'>
-									<i>查看日历</i>
-									<i>查看评价</i>
-								</div>
-							</li>
-							<li class='teacherLiTxtPrice'>￥40元/时</li>
-							<li class='teacherLiTxtAppointment'><i>预约家教</i></li>
-						</ul>
-					</div>
-				</li>
-				
+				<!-- JavaScript add code -->
 			</ul>
 		</div>
 	</div>

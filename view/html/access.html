@@ -1,18 +1,20 @@
 <!-- //注册登录页 -->
 
 <link rel="stylesheet" type="text/css" href="/lib/css/access.scss">
-<div class="access fn-clear">
+
+
+<div class="access fn-clear ">
 		
 	<!-- //登录 -->
-	<div class="accessCtn fn-left fn-clear">
+	<div class="accessCtn fn-left fn-clear" id="loginWapper">
 		<div class="loginPhoto">
 			<img src="/lib/images/mascot.png" width='180' height="180">
 		</div>
 		<div class="inputWrap fn-clear">
-			<form>
-				<input type='text' value='' placeholder='账号' />
-				<input type='password' value='' placeholder='密码' />
-				<button class='inputSubmit'>登录</button>
+			<form id="loginform"  method="post">
+				<input type='text' value='' placeholder='账号' name="name"/>
+				<input type='password' value='' placeholder='密码' name="pwd"/>
+				<button  class='inputSubmit' id = "loginBtn" >登录</button>
 			</form>
 		</div>
 		<div class="acessTips fn-clear">
@@ -23,15 +25,15 @@
 	<!-- //登录 end -->
 
 	<!-- //注册 -->
-	<div class="accessCtn fn-left fn-clear">
+	<div class="accessCtn fn-left fn-clear" id="registerWapper">
 		<h3>
 			注册新用户
 		</h3>
 		<div class="inputWrap fn-clear">
-			<form>
+			<form id="register" action="" method="post">
 				<input type='text' value='' placeholder='账号' />
 				<input type='password' value='' placeholder='密码' />
-				<button class='inputSubmit'>登录</button>
+				<button class='inputSubmit' id = "registerBtn">注册</button>
 			</form>
 		</div>
 		<div class="acessTips fn-clear">
@@ -40,6 +42,41 @@
 		</div>
 	</div>
 	<!-- //注册 end -->
+	<script type="text/javascript">
 
+		window.onload = function(){
+
+			$('#loginform').attr("action", serverip + "/Ipadinterface/login")
+			if ( 1 == 1 ) {
+				$("#loginWapper").addClass("fn-hide");
+				$("#registerWapper").addClass("fn-hide");
+			}else{
+				$("#registerWapper").removeClass("fn-hide");
+				$("#loginWapper").removeClass("fn-hide");
+			}
+
+			$('#loginBtn').click(function(){
+				// $("#loginBtn").preventDefault();
+				$.ajax({
+					url : serverip+"/Ipadinterface/login",
+					type : "post",
+					data : $("#loginform").serializeArray(),
+					success:function(data){
+						kset("sid",data.data.sid);
+						kset("icon",serverpic + data.data.spicture);
+						
+					},
+					complete:function(xhr, status){
+						
+						// return false;
+					},
+					error:function(){
+					}
+
+				})
+				return false;
+			}) 
+		};
+i	</script>
 
 </div>
