@@ -4,7 +4,7 @@
 
 	<div class="teacherInfoHead fn-clear">
 		<i class='teacherInfoHeadBack'></i>
-		肖夏雯<span>老师</span>
+		<em>肖夏雯</em><span>老师</span>
 		<i class='teacherInfoHeadFollow'>关注</i>
 	</div>
 	<!-- //个人信息 -->
@@ -14,7 +14,7 @@
 			<span>当前在线</span>
 		</div>
 		<div class="teacherInfoMainTxt fn-right">
-			<h1>
+			<!-- <h1>
 				肖夏雯 
 				<em class='sexWoman'></em>
 				<span> ( <i class='like'></i> 41 )</span>
@@ -22,7 +22,7 @@
 			</h1>
 			<p>上海交大-数学系</p>
 			<p>吉林长春人</p>
-			<p>辅助学科：物理、数学、英语</p>
+			<p>辅助学科：物理、数学、英语</p> -->
 		</div>
 	</div>
 	<!-- //个人信息 end-->
@@ -60,11 +60,35 @@
 	</div>
 	<!-- //底部按钮 end -->
 	<script type="text/javascript">
-		$(function(){
-
-			function getTeacherInfo(event){
-				alert(event.val())
+			var teacherInfo
+			function setTeacherInfo(tid){
+				url = serverip + "/Ipadinterface/teacherShow/?id="+ tid
+				$.get(url,function(data){
+					teacherInfo = data.data
+					html = ''
+					html = html + '<h1>'
+					html = html + '	'+teacherInfo.t_realname+' '
+					if (teacherInfo.t_sex == 1 ){
+						html = html + '	<em class=\'sexWoman\'></em>'
+					}else{
+						html = html + '	<em class=\'sexBoy\'></em>'
+					}
+					html = html + '	<span> ( <i class=\'like\'></i> 41 )</span>'
+					html = html + '	<i>'+teacherInfo.t_schoolname+'-'+teacherInfo.t_departmentname+'</i>'
+					html = html + '</h1>'
+					html = html + '<p>'+teacherInfo.t_schoolname+'-'+teacherInfo.t_departmentname+'</p>'
+					html = html + '<p>'+teacherInfo.t_cityname+'</p>'
+					var subject = teacherInfo.tp_teach_subject
+					subject = subject.replace(/<br\/>/g,"")
+					subject = subject.replace(/<span>/g,"")
+					subject = subject.replace(/<\/span>/g,"  ")
+					html = html + '<p>辅助学科：'+subject+'</p>'
+					$(".teacherInfoMainPic img").attr("src",serverpic + teacherInfo.t_picture1)
+					$('.teacherInfoHead em').html(teacherInfo.t_realname);
+					$('.teacherInfoMainTxt').append(html)
+					$('.teacherInfo').addClass('teacherStatusShow');
+				})
 			}
-		})
+		
 	</script>
 </div>

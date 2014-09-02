@@ -47,12 +47,20 @@
 
 
 //
+.sexMan{
+	width: 23px;
+	height: 31px;
+	display: inline-block;
+	background: url('/lib/images/sexBoypng?__sprite') no-repeat;
+}
+
 .sexWoman{
 	width: 23px;
 	height: 31px;
 	display: inline-block;
 	background: url('/lib/images/sexWoman.png?__sprite') no-repeat;
 }
+
 .like{
 	width: 36px;
 	height: 39px;
