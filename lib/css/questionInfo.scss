@@ -51,6 +51,25 @@
 			p{
 				margin-bottom: 20px;
 			}
+			textarea{
+				display: block;
+				width: 1500px;
+				min-height: 250px;
+				border-bottom: 2px solid $btnBorderColor;
+			}
+			button{
+				display: block;
+				width: 800px;
+				height: 80px;
+				margin: 0 auto;
+				margin-top: 40px;
+				background:darken($btnBorderColor,20%);
+				border:none;
+				text-align: center;
+				line-height: 80px;
+				color: $white;
+				font-size: 2rem; 
+			}
 		}
 		border-bottom: 2px solid $btnBorderColor;
 	}

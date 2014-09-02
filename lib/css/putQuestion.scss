@@ -1,0 +1,149 @@
+@charset 'utf-8';
+
+@import 'color.scss';
+@import 'compatible.scss';
+@import 'button.scss';
+
+.putQuestion{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -700px;
+	margin-top: -640px;
+	z-index: 200;
+	width: 1400px;
+	height: 1280px;
+	background: $white;
+	border-radius: 30px;
+	overflow: hidden;
+}
+.putQuestionTitle{
+	width: 100%;
+	height:80px;
+	line-height: 80px;
+	text-align: center;
+	font-size: 1.8rem;
+	position: relative;
+	color: $white;
+	background:$putQuestionColor;  
+	span{
+		width: 80px;
+		height: 80px;
+		text-align: center;
+		font-size: 1.4rem;
+		position: absolute;
+		right: 30px;
+	}
+}
+.putQusetionSelect{
+	width: 100%;
+	height: 125px;
+	margin-top:75px;
+	text-align: center; 
+}
+.putQusetionSelectDiv{
+	display: inline-block;
+	width: 400px;
+	height: 58px;
+	position: relative;
+	border-radius: 10px;
+	line-height: 58px;
+	color: $putQuestionColor;
+	border:$putQuestionColor solid 2px;
+	select{
+		width: 90%;
+		border:none;
+		@include brower(appearance,none);
+	}
+	label{
+		position: absolute;
+		right:25px; 
+	}
+}
+.putQusetionSelectDiv:nth-child(2){
+	margin-left: 60px;
+}
+.putQuestionCtn{
+	width: 1300px;
+	height: auto;
+	margin: 0 auto;
+}
+.putQuestionPic{
+	width: 800px;
+	height: 710px;
+	position: relative;
+	border:$putQuestionColor solid 2px;
+	border-radius: 10px;
+	text-align: center;
+	span{
+		display:block;
+		width: 170px;
+		height: 45px;
+		position: absolute;
+		top: 250px;
+		left: 315px;
+		padding-top: 155px;
+		text-align: center;
+		color: $putQuestionColor;
+		background: url('/lib/images/putQuestionPicIcon.png?__sprite') no-repeat 15px 0;
+		font-size: 1.4rem;
+	}
+	img{
+		width: 100%;
+		height: 100%;
+	}
+}
+.putQuestionDes{
+	width: 470px;
+	height: 710px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.putQuestionDesTitle{
+	width: 100%;
+	height:60px;
+	position: relative;
+	line-height: 60px;
+	text-align: center;
+	color: $white;
+	background: $btnBgColor;
+	span{
+		width: 100px;
+		height: 50px;
+		background: url('/lib/images/putQuestionDesSwitch.png?__sprite') no-repeat 30px 0;
+		display:inline-block;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		font-size: 1.1rem;
+	}
+	span.avtive{
+		right: 30px;
+		bottom: 30px;
+		@include brower(transform,scale(0.5));
+	}
+}
+.putQuestionDecWrap{
+	width: 466px;
+	height: 590px;
+	border-right: $putQuestionColor solid 2px;
+	border-left: $putQuestionColor solid 2px;
+	textarea{
+		width: 100%;
+		height: 100%;
+		border:none;
+		text-align: left;
+		text-indent: 0;
+	}
+}
+
+.putQuestionSubmit{
+	@extend .navBtnAvtive;
+	width:310px;
+	height: 64px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 120px;
+	line-height: 64px;
+	font-size: 2rem; 
+}
