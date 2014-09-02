@@ -18,30 +18,44 @@
 			</div>
 		</li>
 		<li>
-			<h3>就读经历：</h3>
+			<!-- <h3>就读经历：</h3> -->
+			<!-- <p>96年6月-04年9月 就读于吉林省长春市省实验小学</p>
 			<p>96年6月-04年9月 就读于吉林省长春市省实验小学</p>
-			<p>96年6月-04年9月 就读于吉林省长春市省实验小学</p>
-			<p>96年6月-04年9月 就读于吉林省长春市省实验小学</p>
+			<p>96年6月-04年9月 就读于吉林省长春市省实验小学</p> -->
 		</li>
 		<li>
-			<h3>获奖经历：</h3>
+			<!-- <h3>获奖经历：</h3>
 			<p>2001年长春市三好学生</p>
 			<p>2001年长春市三好学生</p>
-			<p>2001年长春市三好学生</p>
+			<p>2001年长春市三好学生</p> -->
 		</li>
 		<li>
-			<h3>高考分数：</h3>
+			<!-- <h3>高考分数：</h3>
 			<p>数学：147 / 150</p>
 			<p>数学：147 / 150</p>
 			<p>数学：147 / 150</p>
 			<p>数学：147 / 150</p>
-			<p>数学：147 / 150</p>
+			<p>数学：147 / 150</p> -->
 		</li>
 	</ul>
 </div>
 
 <script type="text/javascript">
 	function setTeacherPersonalInfo(){
-		
+		setTeacherPersonalSchool();
+		setTeacherPersonalAward();
+		setTeacherPersonalAward();
+	}
+
+	function setTeacherPersonalSchool(){
+		$('.teacherPerson ul li').eq(1).html("<h3>就读经历：</h3>" +teacherInfo.tp_profile)
+	}
+
+	function setTeacherPersonalAward(){
+		$('.teacherPerson ul li').eq(2).html("<h3>获奖经历：</h3>" +teacherInfo.tp_get_prize)		
+	}
+
+	function setTeacherPersonalAward(){
+		$('.teacherPerson ul li').eq(3).html("<h3>高考分数：</h3>" +teacherInfo.tp_score)		
 	}
 </script>

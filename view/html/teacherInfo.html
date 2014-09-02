@@ -93,7 +93,7 @@
 					$('.teacherInfoHead em').html(teacherInfo.t_realname);
 					$('.teacherInfoMainTxt').html(html)
 					$('.teacherInfo').addClass('teacherStatusShow');
-					setTeacherPersonalInfo()
+					$(".teacherInfoSwitch span").eq(0).click()
 				})
 			}
 
@@ -103,6 +103,18 @@
 				var sid = $(this).attr("value")
 				$(".teacherInfoSwitchControl"+sid).removeClass("fn-hide");
 				$(".teacherInfoSwitchControl"+sid).siblings().addClass("fn-hide");
+				switch(sid){
+					case "1":
+						setTeacherPersonalInfo();
+						break;
+					case "2":
+						break;
+					case "3":
+						setTeacherPersonalGoodPost()
+						break;
+					default:
+						break
+				}
 
 			})
 	</script>

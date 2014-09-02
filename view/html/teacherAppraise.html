@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/lib/css/teacherAppraise.scss">
 <div class="teacherAppraise fb-clear">
 	<table>
-		<tr>
+	<!-- 	<tr>
 			<td>老师讲的真不错，解决我大部分问题</td>
 			<td>周兴天</td>
 			<td>2014-07-26</td>
@@ -19,6 +19,23 @@
 			<td>周兴天</td>
 			<td>2014-07-26</td>
 			<td>答疑评价</td>
-		</tr>
+		</tr> -->
 	</table>
 </div>
+<script type="text/javascript">
+	function setTeacherPersonalGoodPost(){
+		$(".teacherAppraise table tr").remove()
+		html = ""
+
+		for ( var i in teacherInfo.impressions ){
+			html = html +'<tr>'
+			html = html +'<td>'+teacherInfo.impressions[i].i_impression+'</td>'
+			html = html +'<td>'+teacherInfo.impressions[i].s_realname+'</td>'
+			html = html +'<td>'+teacherInfo.impressions[i].i_date+'</td>'
+			html = html +'<td>答疑评价</td>'
+			html = html +'</tr>'
+		}
+		
+		$(".teacherAppraise table").html(html)
+	}
+</script>
