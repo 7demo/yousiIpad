@@ -29,9 +29,9 @@
 
 	<!-- //切换按钮 -->
 	<div class="teacherInfoSwitch fn-clear">
-		<span class='active'>教师资料</span>
-		<span>时间日历</span>
-		<span>学生评价</span>
+		<span class='active' value = "1">教师资料</span>
+		<span  value = "2">时间日历</span>
+		<span  value = "3">学生评价</span>
 	</div>
 	<!-- //切换按钮 end -->
 
@@ -39,15 +39,21 @@
 	<div class="teacherInfoCtn fn-clear">
 		
 		<!-- //教师资料 -->
-		<link rel="import"  href="/view/html/teacherPerson.html?__inline">
+		<div class = "teacherInfoSwitchControl1">
+			<link rel="import"  href="/view/html/teacherPerson.html?__inline">
+		</div>
 		<!-- //教师资料 end -->
-
+		
 		<!-- //时间日历 -->
-		<link rel="import"  href="/view/html/teacherCalendar.html?__inline">
+		<div class = "teacherInfoSwitchControl2">
+			<link rel="import"  href="/view/html/teacherCalendar.html?__inline">
+		</div>
 		<!-- //时间日历 end -->
 
 		<!-- //学生评价 -->
-		<link rel="import"  href="/view/html/teacherAppraise.html?__inline">
+		<div class = "teacherInfoSwitchControl3">
+			<link rel="import"  href="/view/html/teacherAppraise.html?__inline">
+		</div>
 		<!-- //学生评价 end -->
 
 	</div>
@@ -69,9 +75,9 @@
 					html = html + '<h1>'
 					html = html + '	'+teacherInfo.t_realname+' '
 					if (teacherInfo.t_sex == 1 ){
-						html = html + '	<em class=\'sexWoman\'></em>'
-					}else{
 						html = html + '	<em class=\'sexBoy\'></em>'
+					}else{
+						html = html + '	<em class=\'sexWoman\'></em>'
 					}
 					html = html + '	<span> ( <i class=\'like\'></i> 41 )</span>'
 					html = html + '	<i>'+teacherInfo.t_schoolname+'-'+teacherInfo.t_departmentname+'</i>'
@@ -87,8 +93,17 @@
 					$('.teacherInfoHead em').html(teacherInfo.t_realname);
 					$('.teacherInfoMainTxt').html(html)
 					$('.teacherInfo').addClass('teacherStatusShow');
+					setTeacherPersonalInfo()
 				})
 			}
-		
+
+			$(".teacherInfoSwitch span").click(function(){
+				$(this).addClass("active")
+				$(this).siblings().removeClass("active")
+				var sid = $(this).attr("value")
+				$(".teacherInfoSwitchControl"+sid).removeClass("fn-hide");
+				$(".teacherInfoSwitchControl"+sid).siblings().addClass("fn-hide");
+
+			})
 	</script>
 </div>
