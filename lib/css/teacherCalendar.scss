@@ -47,13 +47,35 @@
 		li{
 			width: 129px;
 			height: 50px;
+			line-height: 50px;
 			text-align: center;
 			border-left: lighten($grayColor,30%) solid 2px;
 			border-top: lighten($grayColor,30%) solid 2px;
+			span{
+				padding: 4px 10px;
+				font-size: 1.5rem;
+				color: $white;
+			}
+		}
+		li.acessOpen{
+			background: $acessOpen;
+		}
+		li.acessSelect{
+			background: $acessSelect;
+		}
+		li.acessSchedule{
+			background: $acessSchedule;
+		}
+		li.acessTentative{
+			background: $acessTentative;
+		}
+		li.acessGrab{
+			background: $acessGrab;
 		}
 		li:first-child{
 			height: 70px;
 			border:none;
+			line-height: 35px;
 		}
 		li:last-child{
 			height: 48px;

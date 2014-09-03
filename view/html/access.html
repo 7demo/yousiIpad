@@ -3,10 +3,14 @@
 <link rel="stylesheet" type="text/css" href="/lib/css/access.scss">
 
 
-<div class="access fn-clear fn-hide ">
+
+<!-- <div class="access fn-clear fn-hide "> -->
+
+<div class="access fn-clear fn-hide">
+
 		
 	<!-- //登录 -->
-	<div class="accessCtn fn-left fn-clear" id="loginWapper">
+	<div class="accessCtn fn-left fn-clear fn-hide" id="loginWapper">
 		<div class="loginPhoto">
 			<img src="/lib/images/mascot.png" width='180' height="180">
 		</div>
@@ -31,8 +35,12 @@
 		</h3>
 		<div class="inputWrap fn-clear">
 			<form id="register" action="" method="post">
-				<input type='text' value='' placeholder='账号' />
-				<input type='password' value='' placeholder='密码' />
+				<div class='inputPhone fn-clear'>
+					<input class='fn-left' type='number' value='' placeholder='请使用手机号码注册' name="phone"/>
+					<span class='fn-right' id = "sendVerifty">发送验证码</span>
+				</div>
+				<input type='number' value='' placeholder='填写验证码' name="verify"/>
+				<input type='password' value='' placeholder='密码' name="pwd"/>
 				<button class='inputSubmit' id = "registerBtn">注册</button>
 			</form>
 		</div>
@@ -45,11 +53,61 @@
 	<script type="text/javascript">
 
 		window.onload = function(){
+
+			$("#sendVerifty").click(function(){
+				var phone = $(".inputPhone input").val()
+				if(!checkout('phone',[phone])) return false;
+				url = serverip +"/Ipadinterface/sendverify"
+				$.post( url , { "phone": phone },
+			        function(data){
+			            if(data.code==200){
+			                $('#sendVerifty').addClass('active');
+			            }else{
+
+			            }
+			            
+			        }, "json"
+		 	   );
+			   return false;
+			})
+
+			$('#registerBtn').click(function(){
+				var phone = $(".inputPhone input").val()
+				var verifty =  $('[name="verify"]').val()
+				var pwd = $('[name="pwd"]').val()
+				console.log(phone + verifty + pwd)
+				if(!checkout('phone',[phone])) return false;
+         		if(!checkout('verify',[verifty])) return false;
+				$.ajax({
+					url : serverip+"/Ipadinterface/register",
+					type : "post",
+					data : $("#register").serializeArray(),
+					success:function(data){
+						console.log(data)
+						// kset("sid",data.data.sid);
+						// kset("icon",serverpic + data.data.spicture);
+						// $(".access").addClass("fn-hide");
+						// hideKeyboard();
+						
+					},
+					complete:function(xhr, status){
+						
+						// return false;
+					},
+					error:function(){
+					}
+
+				})
+				return false;
+			})
+
+
 			$('.acessNew').tap(function(){
 				$("#registerWapper").removeClass("fn-hide");
 				$('.accessCtn').addClass('accessCtnMove');
 				return false;
 			});
+		
 			$('.acessOld').tap(function(){
 				$("#loginWapper").removeClass("fn-hide");
 				$('.accessCtn').removeClass('accessCtnMove');
