@@ -45,7 +45,7 @@
 
 <script type="text/javascript">
 
-	$(".questionHead i").tap(function(){
+	$(".questionHead i").click(function(){
 
 		var bid = $(this).attr("value")
 		if( bid == "3" ){
@@ -106,7 +106,7 @@
 			$(".questionLi1 ul").html("未找到相关问题");
 		}else{
 			$(".questionLi1 ul").html(html);
-			$(".question .questionLi1").on("tap","ul li",function(){
+			$(".question .questionLi1").on("click","ul li",function(){
 				// $('.teacherInfo').addClass('teacherStatusShow');
 				
 				setQuestionInfo($(this).attr("value"));
@@ -139,7 +139,7 @@
 			$(".questionLi2 ul").html("未找到相关问题");
 		}else{
 			$(".questionLi2 ul").html(html);
-			$(".question .questionLi2").on("tap","ul li",function(){
+			$(".question .questionLi2").on("click","ul li",function(){
 				// $('.teacherInfo').addClass('teacherStatusShow');
 				setQuestionInfo($(this).attr("value"));
 				return false;
