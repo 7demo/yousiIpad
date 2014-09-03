@@ -1,6 +1,6 @@
 <!-- //家教页面 -->
 <link rel="stylesheet" type="text/css" href="/lib/css/teacher.scss">
-<div class="teacher fn-clear ">
+<div class="teacher fn-clear fn-hide">
 	
 	<div class="teacherCtn">
 		<div class="teacherHead fn-clear">
@@ -84,7 +84,7 @@
 					html = html + '		</li>'
 				}
 				$(".teacherLi ul").html(html);
-				$(".teacherLi").on("tap","li.teacherLiTxtAppointment",function(){
+				$(".teacherLi").on("click","li.teacherLiTxtAppointment",function(){
 					// $('.teacherInfo').addClass('teacherStatusShow');
 					setTeacherInfo($(this).attr("value"));
 					return false;

@@ -3,10 +3,10 @@
 <link rel="stylesheet" type="text/css" href="/lib/css/access.scss">
 
 
-<div class="access fn-clear ">
+<div class="access fn-clear">
 		
 	<!-- //登录 -->
-	<div class="accessCtn fn-left fn-clear" id="loginWapper">
+	<div class="accessCtn fn-left fn-clear fn-hide" id="loginWapper">
 		<div class="loginPhoto">
 			<img src="/lib/images/mascot.png" width='180' height="180">
 		</div>
@@ -31,7 +31,11 @@
 		</h3>
 		<div class="inputWrap fn-clear">
 			<form id="register" action="" method="post">
-				<input type='text' value='' placeholder='账号' />
+				<div class='inputPhone fn-clear'>
+					<input class='fn-left' type='number' value='' placeholder='请使用手机号码注册' />
+					<span class='fn-right'>发送验证码</span>
+				</div>
+				<input type='number' value='' placeholder='填写验证码' />
 				<input type='password' value='' placeholder='密码' />
 				<button class='inputSubmit' id = "registerBtn">注册</button>
 			</form>
@@ -50,6 +54,7 @@
 				$('.accessCtn').addClass('accessCtnMove');
 				return false;
 			});
+		
 			$('.acessOld').tap(function(){
 				$("#loginWapper").removeClass("fn-hide");
 				$('.accessCtn').removeClass('accessCtnMove');
