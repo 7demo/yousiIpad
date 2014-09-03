@@ -14,10 +14,13 @@
 	box-shadow: -4px 0px 4px darken($btnBorderColor,20%);
 	@include brower(transition,all 0.3s ease-in-out);
 }
+
 .teacherStatusShow{
 	right:0;
 	@include brower(transition,all 0.3s ease-in-out);
 }
+
+
 .teacherInfoHead{
 	width: 100%;
 	height: 69px;

@@ -84,7 +84,7 @@
 					html = html + '		</li>'
 				}
 				$(".teacherLi ul").html(html);
-				$(".teacherLi").on("click","li.teacherLiTxtAppointment",function(){
+				$(".teacherLi").on("tap","li.teacherLiTxtAppointment",function(){
 					// $('.teacherInfo').addClass('teacherStatusShow');
 					setTeacherInfo($(this).attr("value"));
 					return false;

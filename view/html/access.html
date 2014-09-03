@@ -45,25 +45,41 @@
 	<script type="text/javascript">
 
 		window.onload = function(){
-			$('#loginform').attr("action", serverip + "/Ipadinterface/login")
-			if ( 1 == 1 ) {
-				$("#loginWapper").addClass("fn-hide");
-				$("#registerWapper").addClass("fn-hide");
-				$(".access").addClass("fn-hide");
-			}else{
+			$('.acessNew').tap(function(){
 				$("#registerWapper").removeClass("fn-hide");
+				$('.accessCtn').addClass('accessCtnMove');
+				return false;
+			});
+			$('.acessOld').tap(function(){
 				$("#loginWapper").removeClass("fn-hide");
+				$('.accessCtn').removeClass('accessCtnMove');
+				return false;
+			});
+			// $('#loginform').attr("action", serverip + "/Ipadinterface/login")
+			// if ( kget("sid") == null ) {
+			// 	$("#loginWapper").addClass("fn-hide");
+			// 	$("#registerWapper").addClass("fn-hide");
+			// 	$(".access").addClass("fn-hide");
+			// }else{
+			// 	$("#registerWapper").removeClass("fn-hide");
+			// 	$("#loginWapper").removeClass("fn-hide");
+			// }
+			if ( kget("sid") == null ) {
+				$("#registerWapper").addClass("fn-hide");
 			}
-
-			$('#loginBtn').click(function(){
+			$('#loginBtn').tap(function(){
 				// $("#loginBtn").preventDefault();
 				$.ajax({
 					url : serverip+"/Ipadinterface/login",
 					type : "post",
 					data : $("#loginform").serializeArray(),
 					success:function(data){
+
 						kset("sid",data.data.sid);
 						kset("icon",serverpic + data.data.spicture);
+						
+						$(".access").addClass("fn-hide");
+						// hideKeyboard();
 						
 					},
 					complete:function(xhr, status){

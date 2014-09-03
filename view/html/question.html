@@ -3,13 +3,13 @@
 <div class="question fn-clear">
 	<div class="questionCtn">
 		<div class="questionHead fn-clear">
-			<i class='navBtn'>我的提问</i>
-			<i class='navBtnAvtive'>随便看看</i>
-			<i class='btn'>提出问题</i>
+			<i class='navBtnAvtive choose' value = "1">我的提问</i>
+			<i class='navBtn choose' value = "2">随便看看</i>
+			<i class='btn' value = "3">提出问题</i>
 		</div>
-		<div class="questionLi fn-clear">
+		<div class="questionLi fn-clear questionLi1">
 			<ul>
-				<li class='fn-clear'>
+				<!-- <li class='fn-clear'>
 					<img src="/lib/images/pic1.jpg" width="300" height="208">
 					<div class='fn-right'>
 						<h3>2014-06-14的提问<span class='status1'>[已解答]</span></h3>
@@ -20,8 +20,131 @@
 					<div class='fn-right'>
 						<h3>2014-06-14的提问<span class='status2'>[未解答]</span></h3>
 					</div>
+				</li> -->
+			</ul>
+		</div>
+
+		<div class="questionLi fn-clear questionLi2 fn-hide">
+			<ul>
+				<!-- <li class='fn-clear'>
+					<img src="/lib/images/pic1.jpg" width="300" height="208">
+					<div class='fn-right'>
+						<h3>2014-06-14的提问<span class='status1'>[11已解答]</span></h3>
+					</div>
 				</li>
+				<li class='fn-clear'>
+					<img src="/lib/images/pic1.jpg" width="300" height="208">
+					<div class='fn-right'>
+						<h3>2014-06-14的提问<span class='status2'>[未解答]</span></h3>
+					</div>
+				</li> -->
 			</ul>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+	$(".questionHead i").tap(function(){
+
+		var bid = $(this).attr("value")
+		if( bid == "3" ){
+			url = serverip + "/Ipadinterface/newQuestion"
+			$.post(url,{},function(data){
+				if(data.code ==200){
+					alert(data.code)
+				}
+			})
+			//提问相关操作
+			return;
+		}else{
+			$(this).addClass("navBtnAvtive")
+			$(this).siblings(".choose").removeClass("navBtnAvtive")
+			$(this).siblings(".choose").addClass("navBtn")
+			$(".questionLi" + bid).removeClass("fn-hide")
+			$(".questionLi" + bid).siblings(".questionLi").addClass("fn-hide")
+		}
+	})
+
+	var questionList;
+	function getQuestionList(){
+		url = serverip +"/Ipadinterface/getQuestionSearchList/"
+		
+		$.get(url,function(data){
+			questionList = data.data.questionList;
+			setMyQuestion();
+			setRandomQuestion();
+
+		})
+
+	}
+
+	function setMyQuestion(){
+		$(".questionLi1 ul li").remove()
+		html = ""
+		for ( var i in questionList ){
+			if( questionList[i].q_sid == kget("sid") )
+			{
+				html = html + '<li class=\'fn-clear\' value = "'+ questionList[i].q_id +'">'
+				html = html + '	<img src=\"' + serverpic + questionList[i].t_picture1 + '\" width=\"300\" height=\"208\">'
+				html = html + '	<div class=\'fn-right\'>'
+				pubData = questionList[i].q_create_time
+				pubData = pubData.split(" ")
+				status = ""
+				if ( questionList[i].q_status == "0" ) 
+				{
+					html = html + '		<h3>'+pubData[0]+'的提问<span class=\'status2\'>[未解答]</span></h3>'
+				}else{
+					html = html + '		<h3>'+pubData[0]+'的提问<span class=\'status1\'>[已解答]</span></h3>'
+				}
+				
+				html = html + '	</div>'
+				html = html + '</li>'
+			}
+		}
+		if( html == "" ){
+			$(".questionLi1 ul").html("未找到相关问题");
+		}else{
+			$(".questionLi1 ul").html(html);
+			$(".question .questionLi1").on("tap","ul li",function(){
+				// $('.teacherInfo').addClass('teacherStatusShow');
+				
+				setQuestionInfo($(this).attr("value"));
+				return false;
+			});
+		}
+		
+	}
+
+	function setRandomQuestion(){
+		$(".questionLi2 ul li").remove()
+		html = ""
+		for ( var i in questionList ){
+			html = html + '<li class=\'fn-clear\' value = "'+ questionList[i].q_id +'">'
+			html = html + '	<img src=\"' + serverpic + questionList[i].t_picture1 + '\" width=\"300\" height=\"208\">'
+			html = html + '	<div class=\'fn-right\'>'
+			pubData = questionList[i].q_create_time
+			pubData = pubData.split(" ")
+			status = ""
+			if ( questionList[i].q_status == "0" ) 
+			{
+				html = html + '		<h3>'+pubData[0]+'的提问<span class=\'status2\'>[未解答]</span></h3>'
+			}else{
+				html = html + '		<h3>'+pubData[0]+'的提问<span class=\'status1\'>[已解答]</span></h3>'
+			}
+			html = html + '	</div>'
+			html = html + '</li>'
+		}
+		if( html == "" ){
+			$(".questionLi2 ul").html("未找到相关问题");
+		}else{
+			$(".questionLi2 ul").html(html);
+			$(".question .questionLi2").on("tap","ul li",function(){
+				// $('.teacherInfo').addClass('teacherStatusShow');
+				setQuestionInfo($(this).attr("value"));
+				return false;
+			});
+		}
+		
+	}
+</script>

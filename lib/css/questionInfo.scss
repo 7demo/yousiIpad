@@ -6,13 +6,21 @@
 
 .questionInfo{
 	position: absolute;
-	right: 0;
+	right: -1950px;
 	top: 0;
 	width: 1928px;
 	height: 100%;
 	background: $white;
 	box-shadow: -4px 0px 4px darken($btnBorderColor,20%);
+	@include brower(transition,all 0.3s ease-in-out);
 }
+
+.questionInfoStatusShow{
+	right:0;
+	@include brower(transition,all 0.3s ease-in-out);
+}
+
+
 .questionInfoHead{
 	width: 1888px;
 	height: 69px;

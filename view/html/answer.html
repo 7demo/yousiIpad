@@ -5,14 +5,14 @@
 	<div class="answerCtn">
 		<div class="answerHead fn-clear">
 			<div class="answerHeadSelect" >
-				<select id = "gradeSelect">
+				<select id = "gradeSelect" onchange="onchangeEvent()">
 					<option>全部</option>
 					<!-- <option>高三</option> -->
 				</select>
 				<label>▼</label>
 			</div>
 			<div class="answerHeadSelect">
-				<select id = "subjectSelect">
+				<select id = "subjectSelect" onchange="onchangeEvent()">
 					<option>全部</option>
 					<!-- <option>数学</option> -->
 				</select>
@@ -73,23 +73,38 @@
 
 <script type="text/javascript">
 	function setAnswerPage(){
-		getAnswerPageList();
+		getAnswerPageList(true);
 	}
 
-	function getAnswerPageList(){
-		var subjectId = $('#subjectSelect  option:selected').val();
-        var gradeId = $('[name="grade"]  option:selected').val();
-		$.get(serverip + "/Ipadinterface/getAnswerList",function(data,status){
+	function getAnswerPageList(isAll){
+		
+        var selS = document.getElementById("subjectSelect");
+		subjectId = selS.options[selS.selectedIndex].value;
+		var selG = document.getElementById("gradeSelect");
+		gradeId = selG.options[selG.selectedIndex].value;
+        if(isAll == true){
+        	url = serverip + "/Ipadinterface/getAnswerList"
+        }else{
+        	
+        	url = serverip + "/Ipadinterface/getAnswerList/grade/" + gradeId + '/subject/' +subjectId
+        }
+
+		$.get(url,function(data,status){
             if(data.code == 200){
                 gradeData = data.data.gradeData;
                 teacherList = data.data.teacherList
-                setAnswerPageSelect();
+                if(isAll == true){
+                	setAnswerPageSelect();
+                }
                 setAnswerList()
                 
             }
         });
 	}
 
+	function onchangeEvent(){
+		getAnswerPageList(false)
+	}
 
 	function  setAnswerList(){
 		html = ""
@@ -138,6 +153,7 @@
 		clearAll()
 		setGradeSelect()
 		setSubjectSelect()
+		
 	}
 
 	function clearAll(){

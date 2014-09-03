@@ -44,7 +44,7 @@
 	function setTeacherPersonalInfo(){
 		setTeacherPersonalSchool();
 		setTeacherPersonalAward();
-		setTeacherPersonalAward();
+		setTeacherPersonalScore();
 	}
 
 	function setTeacherPersonalSchool(){
@@ -55,7 +55,7 @@
 		$('.teacherPerson ul li').eq(2).html("<h3>获奖经历：</h3>" +teacherInfo.tp_get_prize)		
 	}
 
-	function setTeacherPersonalAward(){
+	function setTeacherPersonalScore(){
 		$('.teacherPerson ul li').eq(3).html("<h3>高考分数：</h3>" +teacherInfo.tp_score)		
 	}
 </script>

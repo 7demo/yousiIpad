@@ -1,6 +1,6 @@
 <!-- //问题内容页 -->
 <link rel="stylesheet" type="text/css" href="/lib/css/questionInfo.scss">
-<div class="questionInfo fn-clear fn-hide">
+<div class="questionInfo fn-clear ">
 	<div class="questionInfoHead fn-clear">
 		<i class='questionInfoHeadBack'></i>
 		2014-06-85的提问
@@ -13,23 +13,11 @@
 					<p>周兴天</p>
 				</div>
 				<div class="questionInfoCtnTxt fn-right">
-					<img src="/lib/images/pic1.jpg">
+					
 				</div>
 			</li>
-			<li class='fn-clear'>
-				<div class="questionInfoCtnName fn-left">
-					<img src="/lib/images/pic2.png" width="194" height="194">
-					<p>周兴天</p>
-				</div>
-				<div class="questionInfoCtnTxt fn-right">
-					<p>下面是解题过程</p>
-					<div class="teacherPersonVideo">
-						<img src="/lib/images/pic3.jpg" width="260" height="150">
-						<i></i>
-					</div>
-				</div>
-			</li>
-			<li class='fn-clear'>
+			
+			<!-- <li class='fn-clear'>
 				<div class="questionInfoCtnName fn-left">
 					<img src="/lib/images/pic2.png" width="194" height="194">
 					<p>周兴天</p>
@@ -37,9 +25,9 @@
 				<div class="questionInfoCtnTxt fn-right">
 					<img src="/lib/images/pic1.jpg">
 				</div>
-			</li>
+			</li> -->
 			<!-- //回答框 -->
-			<li class='fn-clear'>
+		<!-- 	<li class='fn-clear'>
 				<div class="questionInfoCtnName fn-left">
 					<img src="/lib/images/pic2.png" width="194" height="194">
 					<p>自己</p>
@@ -48,9 +36,68 @@
 					<textarea></textarea>
 					<button>确认</button>
 				</div>
-			</li>
+			</li> -->
 			<!-- //回答框 end-->
 		</ul>
 	</div>
 
 </div>
+
+<script type="text/javascript">
+	$('.questionInfo').swipeRight(function(){
+		$('.questionInfo').removeClass('questionInfoStatusShow');
+		return false;
+	});
+	function setQuestionInfo(qid){
+		
+		url = serverip + "/Ipadinterface/questionContent/?id="+ qid
+		$.get(url,function(data){
+			questionInfo = data.desc.questionInfo
+			questionList = data.desc.answerQuestionList
+			pubData = questionInfo.q_create_time
+			pubData = pubData.split(" ")
+			$('.questionInfoHead').html("<i class=\'questionInfoHeadBack\'></i>"+pubData[0]+"的提问")
+			html = ""
+			html = html + '<img src="'+serverpic + questionInfo.q_spicture  +'" width="194" height="194">'
+			html = html + '		<p>'+questionInfo.q_sname+ '</p>'
+			$(".questionInfoCtn ul li").eq(0).children(".questionInfoCtnName").html(html)
+			$(".questionInfoCtn ul li").eq(0).children(".questionInfoCtnTxt ").html(questionInfo.q_content)
+			if ( questionInfo.q_status != 0 )
+			{
+				html = ""
+				html =  html + '<li class=\'fn-clear\'>'
+				html =  html + '	<div class=\"questionInfoCtnName fn-left\">'
+				html =  html + '		<img src=\"' + serverpic+ questionInfo.q_tpicture1 +'\" width=\"194\" height=\"194\">'
+				html =  html + '		<p>'+ questionInfo.q_tname +'</p>'
+				html =  html + '	</div>'
+				html =  html + '	<div class=\"questionInfoCtnTxt fn-right\">'
+				
+				html =  html + '			'+questionInfo.q_content+''
+			
+				html =  html + '		</div>'
+				html =  html + '	</div>'
+				html =  html + '</li>'
+				$('.questionInfoCtn ul').append(html)
+			}
+			for(var i in questionList){
+				html = ""
+				html =  html + '<li class=\'fn-clear\'>'
+				html =  html + '	<div class=\"questionInfoCtnName fn-left\">'
+				html =  html + '		<img src=\"' + serverpic+ questionList.a_spicture +'\" width=\"194\" height=\"194\">'
+				html =  html + '		<p>'+ questionList.a_sname +'</p>'
+				html =  html + '	</div>'
+				html =  html + '	<div class=\"questionInfoCtnTxt fn-right\">'
+				
+				html =  html + '			'+questionList.a_content+''
+			
+				html =  html + '		</div>'
+				html =  html + '	</div>'
+				html =  html + '</li>'
+				$('.questionInfoCtn ul').append(html)
+			}
+
+			$('.questionInfo').addClass('questionInfoStatusShow');
+		})
+
+	}
+</script>

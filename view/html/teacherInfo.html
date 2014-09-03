@@ -66,6 +66,32 @@
 	</div>
 	<!-- //底部按钮 end -->
 	<script type="text/javascript">
+
+			$(".teacherInfoSwitch span").tap(function(){
+				$(this).addClass("active")
+				$(this).siblings().removeClass("active")
+				var sid = $(this).attr("value")
+				$(".teacherInfoSwitchControl"+sid).removeClass("fn-hide");
+				$(".teacherInfoSwitchControl"+sid).siblings().addClass("fn-hide");
+				switch(sid){
+					case "1":
+						setTeacherPersonalInfo();
+						break;
+					case "2":
+						break;
+					case "3":
+						setTeacherPersonalGoodPost()
+						break;
+					default:
+						break
+				}
+
+			})
+
+			$('.teacherInfo').swipeRight(function(){
+				$('.teacherInfo').removeClass('teacherStatusShow');
+				return false;
+			});
 			var teacherInfo
 			function setTeacherInfo(tid){
 				url = serverip + "/Ipadinterface/teacherShow/?id="+ tid
@@ -93,29 +119,12 @@
 					$('.teacherInfoHead em').html(teacherInfo.t_realname);
 					$('.teacherInfoMainTxt').html(html)
 					$('.teacherInfo').addClass('teacherStatusShow');
-					$(".teacherInfoSwitch span").eq(0).click()
+					$(".teacherInfoSwitchControl1").removeClass("fn-hide")
+					$(".teacherInfoSwitchControl2").addClass("fn-hide")
+					$(".teacherInfoSwitchControl3").addClass("fn-hide")
 				})
 			}
 
-			$(".teacherInfoSwitch span").click(function(){
-				$(this).addClass("active")
-				$(this).siblings().removeClass("active")
-				var sid = $(this).attr("value")
-				$(".teacherInfoSwitchControl"+sid).removeClass("fn-hide");
-				$(".teacherInfoSwitchControl"+sid).siblings().addClass("fn-hide");
-				switch(sid){
-					case "1":
-						setTeacherPersonalInfo();
-						break;
-					case "2":
-						break;
-					case "3":
-						setTeacherPersonalGoodPost()
-						break;
-					default:
-						break
-				}
 
-			})
 	</script>
 </div>

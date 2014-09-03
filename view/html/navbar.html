@@ -29,7 +29,8 @@
 	</ul>
 	<script type="text/javascript">
 		$(function(){
-			$(".nav ul li").click(function(){
+			setAnswerPage();
+			$(".nav ul li").tap(function(){
 				var pid = $(this).attr("value")
 				switch(pid)
 				{
@@ -40,7 +41,7 @@
 						getTeacherList();
 						break;
 					case '3':
-						
+						getQuestionList();
 						break;	
 					default:
 					  break;
@@ -48,6 +49,7 @@
 				$('.mainCtn .mainPage' + pid).removeClass("fn-hide")
 				$('.mainCtn .mainPage' + pid).siblings().addClass("fn-hide")
 			})
+			
 		})
 	</script>
 </div>
