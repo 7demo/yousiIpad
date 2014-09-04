@@ -147,6 +147,9 @@
 			html = html + '</li>'
 		}
 		$(".answerLi ul").html(html)
+		$("li.answerLiTxtAppointmentNot").on("click",function(){
+			location.href = "classroom.html?roomid=1"
+		})
 	}
 
 	function setAnswerPageSelect(){
