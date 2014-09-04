@@ -1,22 +1,23 @@
 <!-- //遮罩层 -->
 <link rel="stylesheet" type="text/css" href="/lib/css/putQuestion.scss">
 <div class="putQuestion fn-clear fn-hide">
+	<form id ="pubQuestion" method="post">
 	<div class="putQuestionTitle">
 		创建问题
 		<span>取消</span>
 	</div>
 	<div class="putQusetionSelect fn-clear">
 		<div class="putQusetionSelectDiv">
-			<select>
+			<select id = "gradeQuestionSelect" name = "grade">
 				<option>初中一年级</option>
 				<option>初中一年级</option>
 			</select>
 			<label>▼</label>
 		</div>
 		<div class="putQusetionSelectDiv">
-			<select>
-				<option>初中一年级</option>
-				<option>初中一年级</option>
+			<select id = "subjectQuestionSelect" name ="subject">
+				<option>初中</option>
+				<option>初中</option>
 			</select>
 			<label>▼</label>
 		</div>
@@ -27,7 +28,7 @@
 		<!-- //上传图片 -->
 		<div class="putQuestionPic fn-left">
 			<img src="" class="fn-hide">
-		    <input type="file" class='fn-hide'>	
+		    <input type="file"  name = "file" id = "questionUpload">	
 			<span class='active'>点击给问题拍照</span>
 		</div>
 		<!-- //上传图片 end -->
@@ -41,7 +42,7 @@
 			</div>
 
 			<div class="putQuestionDecWrap">
-				<input type="text" x-webkit-speech />
+				<input type="text" x-webkit-speech id = "putQuestionContent" name = "content"/>
 				<!-- <textarea placeholder='填写问题说明...'></textarea> -->
 			</div>
 
@@ -55,5 +56,156 @@
 	</div>
 
 	<div class="putQuestionSubmit">提交问题</div>
-
+</form>
 </div>
+<script type="text/javascript" src ="/lib/js/grade.js"></script>
+
+
+
+<script type="text/javascript">
+	
+
+	function uploadClickEvet(){
+		submitQuestion()
+	}
+
+	$('.putQuestionSubmit').bind("click",uploadClickEvet)
+
+	function submitQuestion(){
+		var selS = document.getElementById("subjectQuestionSelect");
+		qsubjectId = selS.options[selS.selectedIndex].value;
+		var selG = document.getElementById("gradeQuestionSelect");
+		qgradeId = selG.options[selG.selectedIndex].value;
+		qcontent = $("#putQuestionContent").val()
+		var fileObj = document.getElementById("questionUpload").files[0];
+		var form = new FormData();
+		form.append("grade", qgradeId); 
+		form.append("title", "qgradeId"); 
+		form.append("content", qcontent); 
+		form.append("subject", qsubjectId); 
+		form.append("file", fileObj);
+		filename = fileObj.name
+		var pos = filename.lastIndexOf(".");
+ 		var lastname = filename.substring(pos,filename.length) 
+ 		if( lastname!="jpg" || lastname!="jpeg" || lastname!="png"){
+ 			alert(filename)
+            alert("aaaaa")
+            alert(fileObj.size)
+ 			alert("只能上传.jpg  .jpeg  .png的文  件格式")
+ 			return false;
+ 		}
+ 		console.log(lastname)
+		if(fileObj.size > 3145728){
+			alert("上传文件过大")
+			return false;
+		}
+
+		// XMLHttpRequest 对象
+		var xhr = new XMLHttpRequest();
+		xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+		xhr.open("post", "http://172.16.3.141/Ipadinterface/addQuestion", true);
+		xhr.onload = function(data) {
+		};
+		xhr.send(form);
+		function uploadComplete(evt) {
+        /* This event is raised when the server send back a response */
+      		data = evt.target.responseText;
+      		data = $.parseJSON(data)
+      		console.log(data)
+     	}
+
+     	function uploadFailed(evt) {
+       		alert(evt);
+      	}
+     	function uploadProgress(evt) {
+	        if (evt.lengthComputable) {
+	        	
+	         	var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+	         	
+	         	if(percentComplete<100){
+	         		$('.putQuestionSubmit').unbind("click",uploadClickEvet)
+	         		console.log(percentComplete+"%")
+	         	}else{
+	         		$('.putQuestionSubmit').bind("click",uploadClickEvet)
+	         	}
+	        	// document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+	        	$(".putQuestionPic .active").html("点击给问题拍照"+percentComplete);
+	        }
+	        else {
+	          $(".putQuestionPic .active").html("点击给问题拍照"+"上传失败");
+	        }
+       }
+		// function uploadComplete(){
+		// 	if (xhr.readyState == 4) {
+		// 		if (xhr.status == 200 || xhr.status == 304) {
+		// 			var data=xhr.responseText;
+		// 			data = $.parseJSON(data)
+		// 			// alert(data.code);
+		// 		}
+		// 	}
+
+		// }
+
+
+	}
+
+
+
+	var gradeData = grade
+	gradeData = $.parseJSON (gradeData)
+	console.log(gradeData)
+	setQuestionPutPage()
+	function setQuestionPutPage(){
+		setQuestionPageSelect()
+		a = $('#pubQuestion').serializeArray()
+		console.log(a)
+	}
+
+	function setQuestionPageSelect(){
+		clearAll()
+		
+		setGradeQuestionPutSelect()
+		setSubjeQuestionPutctSelect()
+		
+	}
+
+	function clearAll(){
+		
+		$('.putQusetionSelectDiv #gradeQuestionSelect option').remove();
+		$('.putQusetionSelectDiv #subjectQuestionSelect option').remove();
+	}
+
+	function setGradeQuestionPutSelect(){
+		for ( var i in gradeData ) {
+            html = '';
+            if( gradeData[i].gid != 4 &&   gradeData[i].id > 4){
+                if( gradeData[i].id == 5 ){
+                    html = html + '<option selected=\"selected\" value=\"'+ gradeData[i].id +'\">'+gradeData[i].name+'</option>'
+                }else{
+                     html = html + '<option  value=\"'+ gradeData[i].id +'\">' + gradeData[i].name + '</option>'
+                }
+               
+            }
+            $('.putQusetionSelectDiv #gradeQuestionSelect').append(html);
+        }
+	}
+
+	function setSubjeQuestionPutctSelect(){
+		for ( var i in gradeData ) {
+            html = '';
+            if( gradeData[i].gid == 4 ){
+                if( gradeData[i].id == 17 ){
+                    html = html + '<option selected=\"selected\" value=\"'+ gradeData[i].id +'\">'+gradeData[i].name+'</option>'
+                }else{
+                    html = html + '<option  value=\"'+ gradeData[i].id +'\">' + gradeData[i].name + '</option>'
+                }
+                $('.putQusetionSelectDiv #subjectQuestionSelect').append(html);
+            } 
+        }
+	}
+
+
+
+</script>

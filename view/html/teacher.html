@@ -1,51 +1,59 @@
 <!-- //家教页面 -->
 <link rel="stylesheet" type="text/css" href="/lib/css/teacher.scss">
-<div class="teacher fn-clear fn-hide">
+<div class="teacher fn-clear ">
 	
 	<div class="teacherCtn">
-		<div class="teacherHead fn-clear">
-			<i class='navBtnAvtive'>教师列表</i>
-			<i class='navBtn'>曾经授课</i>
-			<i class='navBtn'>我的关注</i>
+		<div class="teacherHead fn-clear teacherPageSwitch">
+			<i class='navBtnAvtive' value = "1">教师列表</i>
+			<i class='navBtn' value = "2">曾经授课</i>
+			<i class='navBtn' value = "3">我的关注</i>
 		</div>
-		<div class="teacherLi fn-clear">
-			<ul>
-				<!-- JavaScript add code -->
-			</ul>
+		<div class = 'teacherListPage'>
+			<div class="teacherLi fn-clear teacherListPage1">
+				<ul>
+					<!-- JavaScript add code -->
+				</ul>
+			</div>
+			<div class="teacherLi fn-clear teacherListPage2 fn-hide">
+				<ul>
+					<!-- JavaScript add code -->
+				</ul>
+			</div>
+			<div class="teacherLi fn-clear teacherListPage3 fn-hide">
+				<ul>
+					<!-- JavaScript add code -->
+				</ul>
+			</div>
 		</div>
 		<script type="text/javascript">
+		$('.teacherPageSwitch i').click(function(){
+			var pid = $(this).attr("value")
+			$(this).removeClass('navBtn').addClass('navBtnAvtive')
+			$(this).siblings().removeClass('navBtnAvtive').addClass('navBtn')
+			$('.teacherListPage' + pid).removeClass("fn-hide")
+			$('.teacherListPage' + pid).siblings().addClass("fn-hide")
+			switch(pid)
+			{
+				case "1":
+					getTeacherList()
+					break;
+				case "2":
+					getTeacherHistoryList()
+					break;
+				case "3":
+					getTeacherMyAttentionList()
+					break;
+			}
+
+		})
+
+
 		function getTeacherList()
 		{
-
-			var sex = 1;
-		    var school = 0;
-		    var province = 0;
-		    var grade = 5;
-		    var subject = 17;
-		    var nArray = new Array();
-		    var uArray = new Array();
-		    if (sex != 0) {
-		        nArray['sex'] = sex
-		    }
-		    if (school != 0) {
-		        nArray['school'] = school
-		    }
-		    if (province != 0) {
-		        nArray['province'] = province
-		    }
-		    if (grade != 0) {
-		        nArray['grade'] = grade
-		    }
-		    if (subject != 0) {
-		        nArray['subject'] = subject
-		    }
-		    for (key in nArray) {
-		        uArray.push(key + "=" + nArray[key]);
-		    }
-		    var url = uArray.join('&');
-		    $(".teacherLi ul li").remove();
-	        url = serverip +"/Ipadinterface/getTutorList/?"+ url;
+		    $(".teacherListPage1 ul li").remove();
+	        url = serverip +"/Ipadinterface/getTutorList/?";
 	        $.get(url, function(data){
+
 	        	teacherList = data.data.teacherList;
 	        	html = ""
 				for(var i in teacherList){
@@ -83,18 +91,135 @@
 					html = html + '			</div>'
 					html = html + '		</li>'
 				}
-				$(".teacherLi ul").html(html);
-				$(".teacherLi").on("click","li.teacherLiTxtAppointment",function(){
+				$(".teacherListPage1 ul").html(html);
+				$(".teacherListPage1").on("click","li.teacherLiTxtAppointment",function(){
 					// $('.teacherInfo').addClass('teacherStatusShow');
 					setTeacherInfo($(this).attr("value"));
 					return false;
 					
 				});
-				
+			})
+		}
 
-				
+		function getTeacherHistoryList()
+		{
+		    $(".teacherListPage2 ul li").remove();
+	        url = serverip +"/Ipadinterface/getEverTutorList/?";
+	        $.get(url, function(data){
+	        	if (data.code == 200){
+	        		console.log(data)
+		        	teacherList = data.data;
+		        	html = ""
+					for(var i in teacherList){
+					
+						html = html + '		<li class=\'fn-clear\'>'
+						html = html + '			<img class=\"fn-left\" src=\"'+serverpic + teacherList[i].t_picture1+'\">'
+						html = html + '			<div class=\"teacherLiTxt fn-right\">'
+						html = html + '				<ul>'
+						html = html + '					<li>'
+						html = html + '						<h1>'
+						html = html + '							'+teacherList[i].t_realname+' '
+						if( teacherList[i].t_sex == 1 ){
+							html = html + '							<em class=\'sexBoy\'></em>'
+						}else{
+							html = html + '							<em class=\'sexWoman\'></em>'
+						}
+						
+						html = html + '							<span> ( <i class=\'like\'></i> 41 )</span>'
+						html = html + '						</h1>'
+						html = html + '						<p>'+teacherList[i].t_schoolname+'-'+teacherList[i].t_departmentname+'</p>'
+						html = html + '						<p>'+teacherList[i].t_cityname+'</p>'
+						var subject = teacherList[i].tp_teach_subject
+						subject = subject.replace(/<br\/>/g,"")
+						subject = subject.replace(/<span>/g,"")
+						subject = subject.replace(/<\/span>/g,"  ")
+						
+						html = html + '						<p>辅助学科：'+subject+'</p>'
+						html = html + '						<div class=\'teacherLiTxtInforBtn\'>'
+						html = html + '							<i>查看日历</i>'
+						html = html + '							<i>查看评价</i>'
+						html = html + '						</div>'
+						html = html + '					</li>'
+						html = html + '					<li class=\'teacherLiTxtPrice\'>￥'+teacherList[i].t_teach_price+'元/时</li>'
+						html = html + '					<li class=\'teacherLiTxtAppointment\' value = \"'+teacherList[i].t_id+'\"><i >预约家教</i></li>'
+						html = html + '				</ul>'
+						html = html + '			</div>'
+						html = html + '		</li>'
+					}
+					if (html == ""){
+						html = "未找到相关教师"
+					}
+					
+					$(".teacherListPage2 ul").html(html);
 
-				
+					$(".teacherListPage2").on("click","li.teacherLiTxtAppointment",function(){
+						// $('.teacherInfo').addClass('teacherStatusShow');
+						setTeacherInfo($(this).attr("value"));
+						return false;
+						
+					});
+				}
+			})
+		}
+		function getTeacherMyAttentionList()
+		{
+		    $(".teacherListPage3 ul li").remove();
+	        url = serverip +"/Ipadinterface/getAttentionList/";
+	        $.get(url, function(data){
+	        	console.log(data)
+	        	if (data.code == 200){
+	        		console.log(data)
+		        	teacherList = data.data;
+		        	html = ""
+					for(var i in teacherList){
+						console.log(teacherList[i])
+						html = html + '		<li class=\'fn-clear\'>'
+						html = html + '			<img class=\"fn-left\" src=\"'+serverpic + teacherList[i].t_picture1+'\">'
+						html = html + '			<div class=\"teacherLiTxt fn-right\">'
+						html = html + '				<ul>'
+						html = html + '					<li>'
+						html = html + '						<h1>'
+						html = html + '							'+teacherList[i].t_realname+' '
+						if( teacherList[i].t_sex == 1 ){
+							html = html + '							<em class=\'sexBoy\'></em>'
+						}else{
+							html = html + '							<em class=\'sexWoman\'></em>'
+						}
+						
+						html = html + '							<span> ( <i class=\'like\'></i> 41 )</span>'
+						html = html + '						</h1>'
+						html = html + '						<p>'+teacherList[i].t_schoolname+'-'+teacherList[i].t_departmentname+'</p>'
+						html = html + '						<p>'+teacherList[i].t_cityname+'</p>'
+						var subject = teacherList[i].tp_teach_subject
+						subject = subject.replace(/<br\/>/g,"")
+						subject = subject.replace(/<span>/g,"")
+						subject = subject.replace(/<\/span>/g,"  ")
+						
+						html = html + '						<p>辅助学科：'+subject+'</p>'
+						html = html + '						<div class=\'teacherLiTxtInforBtn\'>'
+						html = html + '							<i>查看日历</i>'
+						html = html + '							<i>查看评价</i>'
+						html = html + '						</div>'
+						html = html + '					</li>'
+						html = html + '					<li class=\'teacherLiTxtPrice\'>￥'+teacherList[i].t_teach_price+'元/时</li>'
+						html = html + '					<li class=\'teacherLiTxtAppointment\' value = \"'+teacherList[i].t_id+'\"><i >预约家教</i></li>'
+						html = html + '				</ul>'
+						html = html + '			</div>'
+						html = html + '		</li>'
+					}
+					if (html == ""){
+						html = "未找到相关教师"
+					}
+					
+					$(".teacherListPage3 ul").html(html);
+
+					$(".teacherListPage3").on("click","li.teacherLiTxtAppointment",function(){
+						// $('.teacherInfo').addClass('teacherStatusShow');
+						setTeacherInfo($(this).attr("value"));
+						return false;
+						
+					});
+				}
 			})
 		}
 

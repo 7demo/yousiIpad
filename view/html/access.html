@@ -6,11 +6,11 @@
 
 <!-- <div class="access fn-clear fn-hide "> -->
 
-<div class="access fn-clear fn-hide">
+<div class="access fn-clear">
 
 		
 	<!-- //登录 -->
-	<div class="accessCtn fn-left fn-clear fn-hide" id="loginWapper">
+	<div class="accessCtn fn-left fn-clear" id="loginWapper">
 		<div class="loginPhoto">
 			<img src="/lib/images/mascot.png" width='180' height="180">
 		</div>
@@ -70,7 +70,7 @@
 		 	   );
 			   return false;
 			})
-
+			
 			$('#registerBtn').click(function(){
 				var phone = $(".inputPhone input").val()
 				var verifty =  $('[name="verify"]').val()
@@ -83,10 +83,11 @@
 					type : "post",
 					data : $("#register").serializeArray(),
 					success:function(data){
+
 						console.log(data)
-						// kset("sid",data.data.sid);
-						// kset("icon",serverpic + data.data.spicture);
-						// $(".access").addClass("fn-hide");
+						kset("sid",data.data.sid);
+						kset("icon",serverpic + data.data.spicture);
+						$(".access").addClass("fn-hide");
 						// hideKeyboard();
 						
 					},
@@ -114,25 +115,17 @@
 				return false;
 			});
 			// $('#loginform').attr("action", serverip + "/Ipadinterface/login")
-			// if ( kget("sid") == null ) {
-			// 	$("#loginWapper").addClass("fn-hide");
-			// 	$("#registerWapper").addClass("fn-hide");
-			// 	$(".access").addClass("fn-hide");
-			// }else{
-			// 	$("#registerWapper").removeClass("fn-hide");
-			// 	$("#loginWapper").removeClass("fn-hide");
-			// }
+			
 			if ( kget("sid") == null ) {
 				$("#registerWapper").addClass("fn-hide");
 			}
-			$('#loginBtn').tap(function(){
+			$('#loginBtn').click(function(){
 				// $("#loginBtn").preventDefault();
 				$.ajax({
 					url : serverip+"/Ipadinterface/login",
 					type : "post",
 					data : $("#loginform").serializeArray(),
 					success:function(data){
-
 						kset("sid",data.data.sid);
 						kset("icon",serverpic + data.data.spicture);
 						$(".access").addClass("fn-hide");

@@ -51,9 +51,10 @@
 		if( bid == "3" ){
 			url = serverip + "/Ipadinterface/newQuestion"
 			$.post(url,{},function(data){
-				if(data.code ==200){
-					alert(data.code)
-				}
+				// if(data.code ==200){
+					$(".putQuestion").removeClass("fn-hide")
+					setQuestionPutPage()
+				// }
 			})
 			//提问相关操作
 			return;

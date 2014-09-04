@@ -5,7 +5,7 @@
 	<div class="teacherInfoHead fn-clear">
 		<i class='teacherInfoHeadBack'></i>
 		<em>肖夏雯</em><span>老师</span>
-		<i class='teacherInfoHeadFollow'>关注</i>
+		<i class='teacherInfoHeadFollow' value = "0">关注</i>
 	</div>
 	<!-- //个人信息 -->
 	<div class="teacherInfoMain fn-clear">
@@ -67,6 +67,35 @@
 	<!-- //底部按钮 end -->
 	<script type="text/javascript">
 
+			$('.teacherInfoHeadFollow').click(function(){
+
+				var status = $(this).attr("value")
+				url = serverip + "/Ipadinterface/changeAttention/"
+				$.post(url,{type:status},function(data){
+					if( data.code == 200 ){
+						console.log(data)
+						if(status == "0"){
+							setFollowStatus("1")
+						}else{
+							setFollowStatus("0")
+						}
+					}
+				})
+
+
+			})
+
+			function setFollowStatus(status){
+			
+				if (status == "0") {
+					$('.teacherInfoHeadFollow').attr("value","0")
+					$('.teacherInfoHeadFollow').html("关注")
+				}else{
+					$('.teacherInfoHeadFollow').attr("value","1")
+					$('.teacherInfoHeadFollow').html("已关注")
+				}
+			}
+
 			$(".teacherInfoSwitch span").tap(function(){
 				$(this).addClass("active")
 				$(this).siblings().removeClass("active")
@@ -99,6 +128,8 @@
 					teacherInfo = data.data
 					html = ''
 					html = html + '<h1>'
+					
+					setFollowStatus(teacherInfo.s_attention.toString())
 					html = html + '	'+teacherInfo.t_realname+' '
 					if (teacherInfo.t_sex == 1 ){
 						html = html + '	<em class=\'sexBoy\'></em>'
@@ -125,6 +156,10 @@
 				})
 			}
 
+			$(".teacherInfoHeadBack").tap(function(){
+				$('.teacherInfo').removeClass('teacherStatusShow');
+				return false;
+			})
 
 	</script>
 </div>
