@@ -5,9 +5,6 @@
 @import 'button.scss';
 
 .classroom{
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 1496px;
 	background: lighten($grayColor,40%);
@@ -32,4 +29,83 @@
 	width: 2008px;
 	height: 1396px;
 	margin: 0 auto;
+}
+.mousePosition{
+	width: 36px;
+	height: 36px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+	background: url('/lib/images/iconMouse.png?__sprite') no-repeat;
+}
+.textarea{
+	position: absolute;
+	z-index: 300;
+	textarea{
+		width: 100%;
+		height: 100%;
+	}
+}
+.classroomUpload{
+	width:760px;
+	height: 320px;
+	padding: 15px 20px;
+	position: absolute;
+	z-index: 300;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -400px;
+	border: $classroomColor solid 2px;
+	h3{
+		font-size: 2.5rem;
+		color: $classroomColor;
+	}
+	p{
+		color: $grayColor;
+	}
+}
+.classroomUploadInput{
+	width: 100%;
+	margin-top: 30px;
+	button{
+		width: 300px;
+		height: 40px;
+		background: $classroomColor;
+		font-size: 1.5rem;
+		color: $white;
+		border: none;
+		line-height: 40px;
+	}
+	span{
+		color:$classroomColor; 
+	}
+}
+.classroomUploadProgress{
+	width: 100%;
+	height:30px;
+	margin-top: 10px;
+	position: relative;
+	border: $grayColor solid 1px;
+	i{
+		display: block;
+		height: 30px;
+		width: 0px;
+		background: $grayColor;
+	}
+}
+.classroomUploadCancel{
+	width: 200px;
+	height: 40px;
+	font-size: 1.5rem;
+	margin-top: 20px;
+	border: none;
+	background: invert($classroomColor);
+	color: $white;
+}
+.uploadTips{
+	margin-top: 10px;
+	height: 30px;
+	color: invert($classroomColor);
 }

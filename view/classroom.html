@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome'>
+	<meta name='viewport' content='width=device-width,initial-scale=1.0,maxinum-scale=1.0,user-scalable=no,target-densitydpi=device-dpi'>
+	<title>yousi For Ipad Classroom</title>
+	<link rel="stylesheet" type="text/css" href="/lib/css/base.scss">
+	<link rel="stylesheet" type="text/css" href="/lib/css/index.scss">
+	<link rel="stylesheet" type="text/css" href="/lib/css/classroom.scss">
+</head>
+<body>
+
+<!-- //wrap -->
+<div class="wrap fn-clear">
+	
+	<!-- //toolBar -->
+	<link rel="import"  href="/view/html/toolbar.html?__inline">
+	<!-- //toolBar end -->
+
+	<!-- navbar -->
+	<link rel="import"  href="/view/html/classroom.html?__inline">
+	<!-- navbar end-->
+
+	<!-- //鼠标位置 -->
+	<i id='cursor' class='mousePosition'></i>
+	<!-- //鼠标位置 -->
+
+	<!-- //文本框 -->
+	<div id='fillTxtdiv' class="textarea fn-clear">
+		<textarea id='fillTxt'></textarea>
+	</div>
+	<!-- //文本框 end -->
+
+	<!-- //上传框 -->
+	<div class="classroomUpload fn-clear fn-hide">
+		<h3>请上传文件</h3>
+		<p>可以上传png、jpg、jpeg、gif格式图片，图片大小不超过5M</p>
+		<div class='classroomUploadInput fn-clear'>
+			<input name='answerFile' id='uploadify' type='file' class='fn-hide' >
+			<button class='fn-left'>选择文件</button>
+			<span class='answerBlockName fn-right'>未选择文件</span>
+		</div>
+		<div class='uploadTips'> </div>
+		<div class='classroomUploadProgress'><i></i></div>
+		<button class='classroomUploadCancel fn-right'>取消</button>
+	</div>
+	<!-- //上传框 end -->
+
+</div>
+<!-- //wrap end -->
+
+<script type="text/javascript" src='/lib/js/jquery.js'></script>
+<script type="text/javascript" src="/lib/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src='/lib/js/jquery.fileupload.js'></script>
+<script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
+<script type="text/javascript" src='/lib/js/draw.js'></script>
+<script type="text/javascript" src='/lib/js/canvas.js'></script>
+
+
+</body>
+</html>
