@@ -109,3 +109,28 @@
 	height: 30px;
 	color: invert($classroomColor);
 }
+.endClassroom{
+	width:660px;
+	height: 70px;
+	padding: 15px 20px;
+	line-height: 70px;
+	position: absolute;
+	z-index: 300;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -350px;
+	border: $classroomColor solid 2px;
+	text-align: center;
+	span{
+		display: inline-block;
+		padding: 0px 30px;
+		line-height: 40px;
+		margin: 0 10px;
+		color: $white;
+		background: $classroomColor;
+	};
+	span:last-child{
+		background: invert($classroomColor);
+	}
+}

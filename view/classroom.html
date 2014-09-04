@@ -10,7 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="/lib/css/classroom.scss">
 </head>
 <body>
-
+<script type="text/javascript">
+	
+</script>
 <!-- //wrap -->
 <div class="wrap fn-clear">
 	
@@ -47,10 +49,23 @@
 	</div>
 	<!-- //上传框 end -->
 
+	<!-- //结束上课 -->
+	<div id='endClassroom' class="endClassroom fn-hide">
+		上课已经结束，<span class='continueClassroom'>继续旁听</span>还是<span class='leaveClassroom'>离开房间</span>？
+	</div>
+	<!-- //结束上课 end -->
+
+	<!-- //解散房间 -->
+	<div id='closeClassroom' class="endClassroom fn-hide">
+		房间已解散，请<span class='leaveClassroom'>离开房间</span>
+	</div>
+	<!-- //解散房间 end -->
+
 </div>
 <!-- //wrap end -->
 
 <script type="text/javascript" src='/lib/js/jquery.js'></script>
+<script type="text/javascript" src='/lib/js/server.js'></script>
 <script type="text/javascript" src="/lib/js/jquery.ui.widget.js"></script>
 <script type="text/javascript" src='/lib/js/jquery.fileupload.js'></script>
 <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
